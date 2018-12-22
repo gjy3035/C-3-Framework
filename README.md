@@ -4,9 +4,9 @@ An open-source PyTorch code for crowd counting
 
 ---
 
-This repo is under development. we will spare my spare time to develop it. We plan to release a general, effect code framework on some mainstream datasets. At the same time, we will implement some classic algorithms in this framework.
+This repo is under development. We will spare my spare time to develop it. 
 
-I expect to complete the initial development in March, 2019. 
+We expect to complete the initial development in March, 2019. 
 
 **Tips: Before March, 2019, we will not address and accept any issues and pull requests from outside the team.**
 
