@@ -27,8 +27,6 @@ class VGG_decoder(nn.Module):
                                     nn.ReLU(),
                                     Conv2d(16, 1, 1, same_padding=True, NL='relu'))
 
-        initialize_weights(self.de_pred)    
-        
 
     def forward(self, x):
         x = self.features4(x)       

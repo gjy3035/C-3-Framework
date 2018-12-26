@@ -55,7 +55,7 @@ __C.EXP_PATH = './exp' # the path of logs, checkpoints, and current codes
 
 #------------------------------VAL------------------------
 __C.VAL_DENSE_START = 50
-__C.VAL_FREQ = 1 # Before __C.VAL_DENSE_START epoches, the freq is set as __C.VAL_FREQ
+__C.VAL_FREQ = 5 # Before __C.VAL_DENSE_START epoches, the freq is set as __C.VAL_FREQ
 
 #------------------------------VIS------------------------
 __C.VISIBLE_NUM_IMGS = 1 #  must be 1 for training images with the different sizes

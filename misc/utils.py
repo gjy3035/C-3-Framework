@@ -42,7 +42,20 @@ def real_init_weights(m):
         else:
             print m
 
-
+def weights_normal_init(*models):
+    for model in models:
+        dev=0.01
+        if isinstance(model, list):
+            for m in model:
+                weights_normal_init(m, dev)
+        else:
+            for m in model.modules():            
+                if isinstance(m, nn.Conv2d):        
+                    m.weight.data.normal_(0.0, dev)
+                    if m.bias is not None:
+                        m.bias.data.fill_(0.0)
+                elif isinstance(m, nn.Linear):
+                    m.weight.data.normal_(0.0, dev)
 
 
 def logger(exp_path, exp_name, work_dir, exception):
