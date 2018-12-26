@@ -18,15 +18,16 @@ We expect to complete the initial development in March, 2019.
 
 |                          | GCC | UCF-QNRF | SHT A | SHT B | WorldExpo | UCF_CC_50 |
 |--------------------------|-----|----------|-------|-------|-----------|-----------|
-| MCNN                     |     |          |       |       |           |           |
-| VGG-16 (conv3_3)         |     |          |       |       |           |           |
-| VGG-16 (conv3_3)+decoder |     |          |       |       |           |           |
+| MCNN (RGB Image)         |     |          |       |       |           |           |
+| VGG-16 (conv4_3)         |     |          |       |       |           |           |
+| VGG-16 (conv4_3)+decoder |     |          |       |&radic;|           |           |
 | ResNet-101 (layer3)      |     |          |       |       |           |           |
 | CSRNet                   |     |          |       |       |           |           |
-| SANet                    |     |          |       |       |           |           |
 
 
-### data processing
+
+
+### data processing code
 - [ ] GCC
 - [ ] UCF-QNRF
 - [ ] Shanghai Tech A
@@ -34,10 +35,3 @@ We expect to complete the initial development in March, 2019.
 - [ ] WorldExpo'10
 - [ ] UCF_CC_50
 
-### models
-- [ ] MCNN
-- [ ] VGG-backbone 
-- [ ]  VGG-backbone
-- [ ] ResNet-backbone 
-- [ ] CSRNet
-- [ ] SANet
