@@ -8,7 +8,7 @@ class CrowdCounter(nn.Module):
         super(CrowdCounter, self).__init__()        
         
         if model_name == 'VGG':
-            from vgg import VGG as net
+            from VGG import VGG as net
         elif model_name == 'VGG_DECODER':
             from VGG_decoder import VGG_decoder as net
         elif model_name == 'MCNN':

@@ -20,7 +20,7 @@ if __C.DATASET == 'GCC':# only for GCC
 	__C.VAL_MODE = cfg_data.VAL_MODE 
 
 
-__C.NET = 'VGG' # net selection: MCNN, VGG, VGG_DECODER
+__C.NET = 'VGG_DECODER' # net selection: MCNN, VGG, VGG_DECODER
 
 __C.PRE_GCC = False # use the pretrained model on GCC dataset
 __C.PRE_GCC_MODEL = '' # path to model
