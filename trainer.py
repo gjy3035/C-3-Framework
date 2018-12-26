@@ -70,9 +70,6 @@ class Trainer():
                 print 'val time: {:.2f}s'.format(self.timer['val time'].diff)
 
 
-
-
-
     def train(self): # training for all datasets
         self.net.train()
         for i, data in enumerate(self.train_loader, 0):
@@ -137,7 +134,7 @@ class Trainer():
         print_summary(self.exp_name,[mae, mse, loss],self.train_record)
 
 
-    def validate_V2(self):# validate_V1 for WE
+    def validate_V2(self):# validate_V2 for WE
 
         self.net.eval()
 

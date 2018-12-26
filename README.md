@@ -44,3 +44,13 @@ We expect to complete the initial development in March, 2019.
 - [ ] WorldExpo'10
 - [ ] UCF_CC_50
 
+
+## Parameter settings
+
+### VGG-16 (conv4_3)+decoder
+```config.py```: 
+- __C.LR = 1e-5
+- __C.LR_DECAY = 0.995
+- __C.LR_DECAY_START = -1
+- __C.NUM_EPOCH_LR_DECAY = 1 
+

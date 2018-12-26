@@ -10,7 +10,7 @@ model_path = '/media/D/Models/PyTorch_Pretrained/vgg16-397923af.pth'
 
 class VGG_decoder(nn.Module):
     def __init__(self, pretrained=True):
-        super(VGG, self).__init__()
+        super(VGG_decoder, self).__init__()
         vgg = models.vgg16()
         if pretrained:
             vgg.load_state_dict(torch.load(model_path))
@@ -27,7 +27,7 @@ class VGG_decoder(nn.Module):
                                     nn.ReLU(),
                                     Conv2d(16, 1, 1, same_padding=True, NL='relu'))
 
-        weights_normal_init(self.de_pred)    
+        initialize_weights(self.de_pred)    
         
 
     def forward(self, x):

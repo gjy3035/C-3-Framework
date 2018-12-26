@@ -114,44 +114,6 @@ class Scale(object):
             return img.resize((ow, oh), Image.BILINEAR), mask.resize((ow, oh), Image.NEAREST)
 
 
-class RandomRotate(object):
-    """Crops the given PIL.Image at a random location to have a region of
-    the given size. size can be a tuple (target_height, target_width)
-    or an integer, in which case the target will be of a square shape (size, size)
-    """
-
-    def __init__(self, angle):
-        self.angle = angle
-
-    def __call__(self, image, label):
-        assert label is None or image.size == label.size
-
-        w, h = image.size
-        p = max((h, w))
-        angle = random.randint(0, self.angle * 2) - self.angle
-
-        label = pad_image('constant', label, h, h, w, w, value=0)
-        label = label.rotate(angle, resample=Image.NEAREST)
-        label = label.crop((w, h, w + w, h + h))
-
-        image = pad_image('reflection', image, h, h, w, w)
-        image = image.rotate(angle, resample=Image.BILINEAR)
-        image = image.crop((w, h, w + w, h + h))
-        return image, label
-
-
-class RoadRegionCrop(object):
-    def __init__(self, road_rate_h):
-        self.road_rate_h = road_rate_h
-
-    def __call__(self, img, mask):
-        w, h = img.size
-        road_rate_h = self.road_rate_h
-        y1 = int(round((h*road_rate_h)))
-        crop_bbx = (0, y1, w, h)
-        return img.crop(crop_bbx), mask.crop(crop_bbx)
-
-
 # ===============================label tranforms============================
 
 class DeNormalize(object):

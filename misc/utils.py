@@ -17,7 +17,6 @@ import pdb
 
 
 def initialize_weights(models):
-    # pdb.set_trace()
     for model in models:
         real_init_weights(model)
 
@@ -26,7 +25,7 @@ def real_init_weights(m):
 
     if isinstance(m, list):
         for mini_m in m:
-            weights_normal_init(mini_m)
+            real_init_weights(mini_m)
     else:
         if isinstance(m, nn.Conv2d):    
             nn.init.normal_(m.weight, std=0.01)
@@ -101,6 +100,8 @@ def vis_results(exp_name, epoch, writer, restore, img, pred_map, gt_map):
 
     writer.add_image(exp_name + '_epoch_' + str(epoch+1), x)
 
+
+
 def print_summary(exp_name,scores,train_record):
     mae, mse, loss = scores
     print '='*50
@@ -133,6 +134,7 @@ def print_GCC_summary(exp_name,scores,train_record,c_maes,c_mses):
         f.write('    list: ' + str(np.transpose(c_mses['weather']))+ '\n\n')
 
         f.write('='*15 + '+'*15 + '='*15 + '\n\n')
+
 
 def update_model(net,epoch,exp_path,exp_name,scores,train_record,log_file):
 
