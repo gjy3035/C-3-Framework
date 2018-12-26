@@ -25,6 +25,15 @@ We expect to complete the initial development in March, 2019.
 | CSRNet                   |     |          |       |       |           |           |
 
 
+##  Performance
+
+|                          | GCC | UCF-QNRF | SHT A | SHT B | WorldExpo | UCF_CC_50 |
+|--------------------------|-----|----------|-------|-------|-----------|-----------|
+| MCNN (RGB Image)         |     |          |       |       |           |           |
+| VGG-16 (conv4_3)         |     |          |       |       |           |           |
+| VGG-16 (conv4_3)+decoder |     |          |       |       |           |           |
+| ResNet-101 (layer3)      |     |          |       |       |           |           |
+| CSRNet                   |     |          |       |       |           |           |
 
 
 ### data processing code
