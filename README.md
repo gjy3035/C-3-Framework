@@ -22,6 +22,7 @@ The purpose of this code is an effient, flexible framework for supervised crowd 
 
 ##  Progress
 
+
 |                          | GCC | UCF-QNRF | SHT A | SHT B | WorldExpo | UCF_CC_50 |
 |--------------------------|-----|----------|-------|-------|-----------|-----------|
 | MCNN (RGB Image)         |     |          |       |&radic;|           |           |
@@ -53,10 +54,15 @@ The purpose of this code is an effient, flexible framework for supervised crowd 
 
 ## Parameter settings
 
-### VGG-16 (conv4_3)+decoder
-```config.py```: 
-- __C.LR = 1e-5
-- __C.LR_DECAY = 0.995
-- __C.LR_DECAY_START = -1
-- __C.NUM_EPOCH_LR_DECAY = 1 
+
+See in ```./results_reports```.
+
+## Prerequisites
+
+- python 2.7
+- pyTorch 1.0
+
+## Installation
+
+```pip install -r requirements.txt```
 
