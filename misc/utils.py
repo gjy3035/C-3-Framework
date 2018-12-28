@@ -128,28 +128,31 @@ def print_summary(exp_name,scores,train_record):
     print '='*50
 
 
-def print_GCC_summary(exp_name,scores,train_record,c_maes,c_mses):
+def print_GCC_summary(log_txt,epoch, scores,train_record,c_maes,c_mses):
     mae, mse, loss = scores
+    c_mses['level'] = np.sqrt(c_mses['level'].avg)
+    c_mses['time'] = np.sqrt(c_mses['time'].avg)
+    c_mses['weather'] = np.sqrt(c_mses['weather'].avg)
     with open(log_txt, 'a') as f:
         f.write('='*15 + '+'*15 + '='*15 + '\n')
-        f.write(snapshot_name + '\n\n')
+        f.write(str(epoch) + '\n\n')
         f.write('  [mae %.4f mse %.4f], [val loss %.4f]\n\n' % (mae, mse, loss))
-        f.write('  [level: mae %.4f mse %.4f]\n' % (np.average(c_maes['level']), np.average(c_mses['level'])))
-        f.write('    list: ' + str(np.transpose(c_maes['level'])) + '\n')
+        f.write('  [level: mae %.4f mse %.4f]\n' % (np.average(c_maes['level'].avg), np.average(c_mses['level'])))
+        f.write('    list: ' + str(np.transpose(c_maes['level'].avg)) + '\n')
         f.write('    list: ' + str(np.transpose(c_mses['level'])) + '\n\n')
 
-        f.write('  [time: mae %.4f mse %.4f]\n' % (np.average(c_maes['time']), np.average(c_mses['time'])))
-        f.write('    list: ' + str(np.transpose(c_maes['time'])) + '\n')
+        f.write('  [time: mae %.4f mse %.4f]\n' % (np.average(c_maes['time'].avg), np.average(c_mses['time'])))
+        f.write('    list: ' + str(np.transpose(c_maes['time'].avg)) + '\n')
         f.write('    list: ' + str(np.transpose(c_mses['time'])) + '\n\n')
 
-        f.write('  [weather: mae %.4f mse %.4f]\n' % (np.average(c_maes['weather']), np.average(c_mses['weather'])))
-        f.write('    list: ' + str(np.transpose(c_maes['weather'])) + '\n')
+        f.write('  [weather: mae %.4f mse %.4f]\n' % (np.average(c_maes['weather'].avg), np.average(c_mses['weather'])))
+        f.write('    list: ' + str(np.transpose(c_maes['weather'].avg)) + '\n')
         f.write('    list: ' + str(np.transpose(c_mses['weather']))+ '\n\n')
 
         f.write('='*15 + '+'*15 + '='*15 + '\n\n')
 
 
-def update_model(net,epoch,exp_path,exp_name,scores,train_record,log_file):
+def update_model(net,epoch,exp_path,exp_name,scores,train_record,log_file=None):
 
     mae, mse, loss = scores
 
@@ -157,7 +160,8 @@ def update_model(net,epoch,exp_path,exp_name,scores,train_record,log_file):
 
     if mae < train_record['best_mae'] or mse < train_record['best_mse']:   
         train_record['best_model_name'] = snapshot_name
-        logger_txt(log_file,epoch,scores)
+        if log_file is not None:
+            logger_txt(log_file,epoch,scores)
         to_saved_weight = net.state_dict()
         torch.save(to_saved_weight, os.path.join(exp_path, exp_name, snapshot_name + '.pth'))
 
@@ -208,14 +212,15 @@ class AverageMeter(object):
 class AverageCategoryMeter(object):
     """Computes and stores the average and current value"""
 
-    def __init__(self,num_class):
+    def __init__(self,num_class):        
+        self.num_class = num_class
         self.reset()
 
     def reset(self):
-        self.cur_val = np.zeros(num_class)
-        self.avg = np.zeros(num_class)
-        self.sum = np.zeros(num_class)
-        self.count = np.zeros(num_class)
+        self.cur_val = np.zeros(self.num_class)
+        self.avg = np.zeros(self.num_class)
+        self.sum = np.zeros(self.num_class)
+        self.count = np.zeros(self.num_class)
 
     def update(self, cur_val, class_id):
         self.cur_val[class_id] = cur_val

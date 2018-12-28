@@ -37,10 +37,10 @@ def loading_data():
         train_list = 'cross_location_train_list.txt'    
 
 
-    train_set = GCC(cfg.DATA.DATA_PATH+'/txt_list/' + train_list, 'train',main_transform=train_main_transform, img_transform=img_transform, gt_transform=gt_transform)
-    train_loader = DataLoader(train_set, batch_size=cfg.TRAIN.BATCH_SIZE, num_workers=8, shuffle=True, drop_last=True)
+    train_set = GCC(cfg_data.DATA_PATH+'/txt_list/' + train_list, 'train',main_transform=train_main_transform, img_transform=img_transform, gt_transform=gt_transform)
+    train_loader = DataLoader(train_set, batch_size=cfg_data.TRAIN_BATCH_SIZE, num_workers=8, shuffle=True, drop_last=True)
 
-    val_set = GCC(cfg.DATA.DATA_PATH+'/txt_list/'+ test_list, 'test', main_transform=val_main_transform, img_transform=img_transform, gt_transform=gt_transform)
-    val_loader = DataLoader(val_set, batch_size=cfg.VAL.BATCH_SIZE, num_workers=8, shuffle=True, drop_last=False)
+    val_set = GCC(cfg_data.DATA_PATH+'/txt_list/'+ test_list, 'test', main_transform=None, img_transform=img_transform, gt_transform=gt_transform)
+    val_loader = DataLoader(val_set, batch_size=cfg_data.VAL_BATCH_SIZE, num_workers=8, shuffle=True, drop_last=False)
 
     return train_loader, val_loader, restore_transform

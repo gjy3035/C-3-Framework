@@ -43,7 +43,7 @@ class Trainer():
 
     def forward(self):
 
-        # self.validate_V1()
+        # self.validate_V3()
         for epoch in range(cfg.MAX_EPOCH):
             self.epoch = epoch
             if epoch > cfg.LR_DECAY_START:
@@ -187,9 +187,11 @@ class Trainer():
 
         for vi, data in enumerate(self.val_loader, 0):
             img, gt_map, attributes_pt = data
+
             with torch.no_grad():
                 img = Variable(img).cuda()
                 gt_map = Variable(gt_map).cuda()
+
 
                 pred_map = self.net.forward(img,gt_map)
 
@@ -204,13 +206,14 @@ class Trainer():
 
                 losses.update(self.net.loss.item())
                 maes.update(s_mae)
-                mses.update(s_mse)                
-                c_maes['level'].update(s_mae,attributes_pt[i_img][0])
-                c_mses['level'].update(s_mse,attributes_pt[i_img][0])
-                c_maes['time'].update(s_mae,attributes_pt[i_img][1]/3)
-                c_mses['time'].update(s_mse,attributes_pt[i_img][1]/3)
-                c_maes['weather'].update(s_mae,attributes_pt[i_img][2])
-                c_mses['weather'].update(s_mse,attributes_pt[i_img][2])
+                mses.update(s_mse)   
+                attributes_pt = attributes_pt.squeeze() 
+                c_maes['level'].update(s_mae,attributes_pt[0])
+                c_mses['level'].update(s_mse,attributes_pt[0])
+                c_maes['time'].update(s_mae,attributes_pt[1]/3)
+                c_mses['time'].update(s_mse,attributes_pt[1]/3)
+                c_maes['weather'].update(s_mae,attributes_pt[2])
+                c_mses['weather'].update(s_mse,attributes_pt[2])
 
 
                 if vi==0:
@@ -225,9 +228,6 @@ class Trainer():
         self.writer.add_scalar('mae', mae, self.epoch + 1)
         self.writer.add_scalar('mse', mse, self.epoch + 1)
 
-        self.train_record = update_model(self.net,self.epoch,self.exp_path,self.exp_name,[mae, mse, loss],self.train_record,self.log_txt)
+        self.train_record = update_model(self.net,self.epoch,self.exp_path,self.exp_name,[mae, mse, loss],self.train_record)
 
-        c_mses['level'] = np.sqrt(c_mses['level'].avg)
-        c_mses['time'] = np.sqrt(c_mses['time'].avg)
-        c_mses['weather'] = np.sqrt(c_mses['weather'].avg)
-        print_GCC_summary(self.exp_name,[mae, mse, loss],self.train_record,c_maes,c_mses)
+        print_GCC_summary(self.log_txt,self.epoch,[mae, mse, loss],self.train_record,c_maes,c_mses)

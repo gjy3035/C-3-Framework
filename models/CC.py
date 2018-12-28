@@ -15,6 +15,8 @@ class CrowdCounter(nn.Module):
             from MCNN import MCNN as net
         elif model_name == 'CSRNet':
             from CSRNet import CSRNet as net
+        elif model_name == 'Res50':
+            from Res50 import Res50 as net
 
         self.CCN = net()
         if len(gpus)>1:

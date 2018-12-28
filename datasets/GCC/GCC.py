@@ -3,9 +3,10 @@ import os
 import torch
 from PIL import Image
 from scipy import io as sio
-from config import cfg
 from torch.utils import data
 import pdb
+
+from setting import cfg_data 
 
 class GCC(data.Dataset):
     def __init__(self, list_file, mode, main_transform=None, img_transform=None, gt_transform=None):
@@ -16,7 +17,6 @@ class GCC(data.Dataset):
         self.file_folder = []
         self.file_name = []
         self.gt_cnt = []
-        self.den_folder_name = cfg.DATA.GT
         
         with open(list_file) as f:
             lines = f.readlines()
@@ -64,12 +64,14 @@ class GCC(data.Dataset):
 
     def read_image_and_gt(self,index):
         # print self.file_folder[index] + ' ' + self.file_name[index] + ' ' + self.gt_cnt[index]
-        img_path = os.path.join(cfg.DATA.DATA_PATH+self.file_folder[index], 'pngs_544_960', self.file_name[index]+'.png')
+        img_path = os.path.join(cfg_data.DATA_PATH+self.file_folder[index], 'pngs_544_960', self.file_name[index]+'.png')
 
-        den_map_path = os.path.join(cfg.DATA.DATA_PATH+self.file_folder[index], 'den_maps_' + cfg.DATA.GT +'_544_960', self.file_name[index]+'.mat')
+        den_map_path = os.path.join(cfg_data.DATA_PATH+self.file_folder[index], 'den_maps_' + cfg_data.DATA_GT +'_544_960', self.file_name[index]+'.mat')
 
         img = Image.open(img_path)
         den_map = sio.loadmat(den_map_path)['den_map'] 
+
+        den_map = den_map.astype(np.float32, copy=False)
 
         den_map = Image.fromarray(den_map)
         

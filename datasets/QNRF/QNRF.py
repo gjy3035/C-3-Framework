@@ -9,9 +9,7 @@ from PIL import Image, ImageOps
 
 import pandas as pd
 
-from config import cfg
-
-class SHHA(data.Dataset):
+class QNRF(data.Dataset):
     def __init__(self, data_path, mode, main_transform=None, img_transform=None, gt_transform=None):
         self.img_path = data_path + '/img'
         self.gt_path = data_path + '/den'
