@@ -13,6 +13,8 @@ class CrowdCounter(nn.Module):
             from VGG_decoder import VGG_decoder as net
         elif model_name == 'MCNN':
             from MCNN import MCNN as net
+        elif model_name == 'CSRNet':
+            from CSRNet import CSRNet as net
 
         self.CCN = net()
         if len(gpus)>1:

@@ -22,7 +22,6 @@ The purpose of this code is an effient, flexible framework for supervised crowd 
 
 ##  Progress
 
-
 |                          | GCC | UCF-QNRF | SHT A | SHT B | WorldExpo | UCF_CC_50 |
 |--------------------------|-----|----------|-------|-------|-----------|-----------|
 | MCNN (RGB Image)         |     |          |       |&radic;|           |           |
@@ -37,10 +36,10 @@ The purpose of this code is an effient, flexible framework for supervised crowd 
 |                          | GCC | UCF-QNRF | SHT A | SHT B | WorldExpo | UCF_CC_50 |
 |--------------------------|-----|----------|-------|-------|-----------|-----------|
 | MCNN (RGB Image)         |     |          |       |23.9/42.7|           |           |
-| VGG-16 (conv4_3)         |     |          |       |10.3/16.5|           |           |
+| VGG-16 (conv4_3)         |     |          |71.4/115.7|10.3/16.5|           |           |
 | VGG-16 (conv4_3)+decoder |     |          |       |10.5/17.4|           |           |
-| ResNet-101 (layer3)      |     |          |       |       |           |           |
-| CSRNet                   |     |          |       |       |           |           |
+| ResNet-50 (layer3)      |     |          |       |       |           |           |
+| CSRNet                   |     |          |       |10.6/16.6|           |           |
 
 
 ### data processing code
@@ -54,15 +53,10 @@ The purpose of this code is an effient, flexible framework for supervised crowd 
 
 ## Parameter settings
 
-
-See in ```./results_reports```.
-
-## Prerequisites
-
-- python 2.7
-- pyTorch 1.0
-
-## Installation
-
-```pip install -r requirements.txt```
+### VGG-16 (conv4_3)+decoder
+```config.py```: 
+- __C.LR = 1e-5
+- __C.LR_DECAY = 0.995
+- __C.LR_DECAY_START = -1
+- __C.NUM_EPOCH_LR_DECAY = 1 
 
