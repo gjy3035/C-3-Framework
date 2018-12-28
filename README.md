@@ -39,7 +39,7 @@ The purpose of this code is an effient, flexible framework for supervised crowd 
 | VGG-16 (conv4_3)         |     |          |71.4/115.7|10.3/16.5|           |           |
 | VGG-16 (conv4_3)+decoder |     |          |       |10.5/17.4|           |           |
 | ResNet-50 (layer3)      |     |          |       |       |           |           |
-| CSRNet                   |     |          |       |10.6/16.6|           |           |
+| CSRNet                   |     |          |69.3/111.9|10.6/16.6|           |           |
 
 
 ### data processing code
