@@ -16,19 +16,9 @@ The purpose of this code is an effient, flexible framework for supervised crowd 
 
 
 ## Features
+- **Convenient development kit**. It support the convenient  dev kit on the six maintream datasets.
+- **Solid baselines**. It provides some baselines of classic pre-trained models, such as VGG, ResNet, DenseNet and so on. Base on it, you can compare your proposed models' effects.
 - **Powerful log**. It does not only record the loss, visulization in Tensorboard, but also save the current code package (including parameters settings). The saved code package can be directly ran to reproduce the experiments at any time. You won't be bothered by forgetting the parameters.
-- 
-
-
-##  Progress
-
-|                          | GCC | UCF-QNRF | SHT A | SHT B | WorldExpo | UCF_CC_50 |
-|--------------------------|-----|----------|-------|-------|-----------|-----------|
-| MCNN (RGB Image)         |     |          |       |&radic;|           |           |
-| VGG-16 (conv4_3)         |     |          |       |&radic;|           |           |
-| VGG-16 (conv4_3)+decoder |     |          |       |&radic;|           |           |
-| ResNet-101 (layer3)      |     |          |       |       |           |           |
-| CSRNet                   |     |          |       |       |           |           |
 
 
 ##  Performance
@@ -40,6 +30,20 @@ The purpose of this code is an effient, flexible framework for supervised crowd 
 | VGG-16 (conv4_3)+decoder |     |          |       |10.5/17.4|           |           |
 | ResNet-50 (layer3)      |     |          |       |       |           |           |
 | CSRNet                   |     |          |69.3/111.9|10.6/16.6|           |           |
+
+
+##  Progress
+
+|                          | GCC | UCF-QNRF | SHT A | SHT B | WorldExpo | UCF_CC_50 |
+|--------------------------|-----|----------|-------|-------|-----------|-----------|
+| MCNN (RGB Image)         |     |          |       |&radic;|           |           |
+| VGG-16 (conv4_3)         |     |          |       |&radic;|           |           |
+| VGG-16 (conv4_3)+decoder |     |          |       |&radic;|           |           |
+| ResNet-50 (layer3)      |     |          |       |       |           |           |
+| CSRNet                   |     |          |&radic;|&radic;|           |           |
+
+
+
 
 
 ### data processing code
