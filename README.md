@@ -26,8 +26,8 @@ The purpose of this code is an effient, flexible framework for supervised crowd 
 |                          | GCC(rd,cc,cl) | UCF-QNRF | SHT A | SHT B | WorldExpo | UCF_CC_50 |
 |--------------------------|-----|----------|-------|-------|-----------|-----------|
 | MCNN (RGB Image)         |     |          |       |23.9/42.7|           |           |
-| VGG-16 (conv4_3)         |     |          |71.4/115.7|10.3/16.5|           |           |
-| VGG-16 (conv4_3)+decoder |     |          |       |10.5/17.4|           |           |
+| VGG-16 (conv4_3)         |     |119.3/207.7|71.4/115.7|10.3/16.5|           |           |
+| VGG-16 (conv4_3)+decoder |     |115.2/189.6|       |10.5/17.4|           |           |
 | ResNet-50 (layer3)       |     |          |       |7.7/12.6 |           |           |
 | CSRNet                   |     |          |69.3/111.9|10.6/16.6|           |           |
 
@@ -37,8 +37,8 @@ The purpose of this code is an effient, flexible framework for supervised crowd 
 |                          | GCC | UCF-QNRF | SHT A | SHT B | WorldExpo | UCF_CC_50 |
 |--------------------------|-----|----------|-------|-------|-----------|-----------|
 | MCNN (RGB Image)         |     |          |       |&radic;|           |           |
-| VGG-16 (conv4_3)         |ing  | ing      |       |&radic;|           |           |
-| VGG-16 (conv4_3)+decoder |ing  | ing      |       |&radic;|           |           |
+| VGG-16 (conv4_3)         |ing  | &radic;  |&radic;|&radic;|           |           |
+| VGG-16 (conv4_3)+decoder |ing  | &radic;  |       |&radic;|           |           |
 | ResNet-50 (layer3)       |ing  |          |       |&radic;|           |           |
 | CSRNet                   |     |          |&radic;|&radic;|           |           |
 
