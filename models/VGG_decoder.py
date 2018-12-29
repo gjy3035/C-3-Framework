@@ -6,7 +6,7 @@ from misc.layer import Conv2d, FC
 from torchvision import models
 from misc.utils import *
 
-model_path = '/media/D/Models/PyTorch_Pretrained/vgg16-397923af.pth'
+model_path = '../PyTorch_Pretrained/vgg16-397923af.pth'
 
 class VGG_decoder(nn.Module):
     def __init__(self, pretrained=True):

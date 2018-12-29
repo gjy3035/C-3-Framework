@@ -7,7 +7,7 @@ cfg_data = __C_SHHA
 
 __C_SHHA.STD_SIZE = (768,1024)
 __C_SHHA.TRAIN_SIZE = (576,768)
-__C_SHHA.DATA_PATH = '/media/D/DataSet/CC/Shanghai_proA'               
+__C_SHHA.DATA_PATH = '../ProcessedData/Shanghai_proA'               
 
 __C_SHHA.MEAN_STD = ([0.410824894905, 0.370634973049, 0.359682112932], [0.278580576181, 0.26925137639, 0.27156367898])
 

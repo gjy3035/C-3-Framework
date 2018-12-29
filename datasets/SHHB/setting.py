@@ -7,7 +7,7 @@ cfg_data = __C_SHHB
 
 __C_SHHB.STD_SIZE = (768,1024)
 __C_SHHB.TRAIN_SIZE = (576,768)
-__C_SHHB.DATA_PATH = '/media/D/DataSet/CC/768x1024RGB-k15-s4/shanghaitech_part_B'               
+__C_SHHB.DATA_PATH = '../ProcessedData/shanghaitech_part_B'               
 
 __C_SHHB.MEAN_STD = ([0.452016860247, 0.447249650955, 0.431981861591],[0.23242045939, 0.224925786257, 0.221840232611])
 

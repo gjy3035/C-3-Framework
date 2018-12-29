@@ -9,7 +9,7 @@ from misc.utils import *
 
 import pdb
 
-model_path = '/media/D/Models/PyTorch_Pretrained/resnet50-19c8e357.pth'
+model_path = '../PyTorch_Pretrained/resnet50-19c8e357.pth'
 
 class Res50(nn.Module):
     def __init__(self, ):
