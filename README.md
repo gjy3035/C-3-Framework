@@ -36,7 +36,7 @@ The purpose of this code is an effient, flexible framework for supervised crowd 
 
 |                          | GCC | UCF-QNRF | SHT A | SHT B | WorldExpo | UCF_CC_50 |
 |--------------------------|-----|----------|-------|-------|-----------|-----------|
-| MCNN (RGB Image)         |     |          |&radic;|&radic;|           |           |
+| MCNN (RGB Image)         |     |  &radic; |&radic;|&radic;|           |           |
 | VGG-16 (conv4_3)         |ing  | &radic;  |&radic;|&radic;|           |           |
 | VGG-16 (conv4_3)+decoder |ing  | &radic;  |&radic;|&radic;|           |           |
 | ResNet-50 (layer3)       |ing  |          |       |&radic;|           |           |
