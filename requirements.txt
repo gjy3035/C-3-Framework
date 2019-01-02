@@ -4,4 +4,6 @@ tensorboardX
 tensorboard
 tensorflow
 easydict
-pandas 
+pandas
+numpy
+scipy
