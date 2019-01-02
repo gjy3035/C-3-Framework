@@ -12,11 +12,11 @@ We expect to complete the initial development in March, 2019.
 
 ## Goal
 
-The purpose of this code is an effient, flexible framework for supervised crowd counting. At the same time, we provide the performances of some basic networks and claasic algorithms on the mainstream datasets.
+The purpose of this code is an efficient, flexible framework for supervised crowd counting. At the same time, we provide the performances of some basic networks and classic algorithms on the mainstream datasets.
 
 
 ## Features
-- **Convenient development kit**. It support the convenient  dev kit on the six maintream datasets.
+- **Convenient development kit**. It support the convenient dev kit on the six maintream datasets.
 - **Solid baselines**. It provides some baselines of classic pre-trained models, such as VGG, ResNet, DenseNet and so on. Base on it, you can compare your proposed models' effects.
 - **Powerful log**. It does not only record the loss, visulization in Tensorboard, but also save the current code package (including parameters settings). The saved code package can be directly ran to reproduce the experiments at any time. You won't be bothered by forgetting the parameters.
 
@@ -49,8 +49,8 @@ The purpose of this code is an effient, flexible framework for supervised crowd 
 ### data processing code
 - [ ] GCC
 - [ ] UCF-QNRF
-- [ ] Shanghai Tech A
-- [ ] Shanghai Tech B
+- [ ] ShanghaiTech Part_A
+- [ ] ShanghaiTech Part_B
 - [ ] WorldExpo'10
 - [ ] UCF_CC_50
 
