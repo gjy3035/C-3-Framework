@@ -1,6 +1,6 @@
-The results of VGG on GCC dataset using random splitting.
+The results of VGG decoder on GCC dataset using random splitting.
 
-The model is trained 35 epoches, which achieves MAE of **36.6** and MSE of **88.9**. 
+The model is trained 35 epoches, which achieves MAE of **37.2** and MSE of **91.2**. 
 
 ## Screenshot of Training Process
 
