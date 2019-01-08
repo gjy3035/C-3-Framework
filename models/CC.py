@@ -8,15 +8,17 @@ class CrowdCounter(nn.Module):
         super(CrowdCounter, self).__init__()        
         
         if model_name == 'VGG':
-            from VGG import VGG as net
+            from SCC_Model.VGG import VGG as net
         elif model_name == 'VGG_DECODER':
-            from VGG_decoder import VGG_decoder as net
+            from SCC_Model.VGG_decoder import VGG_decoder as net
         elif model_name == 'MCNN':
-            from MCNN import MCNN as net
+            from SCC_Model.MCNN import MCNN as net
         elif model_name == 'CSRNet':
-            from CSRNet import CSRNet as net
+            from SCC_Model.CSRNet import CSRNet as net
         elif model_name == 'Res50':
-            from Res50 import Res50 as net
+            from SCC_Model.Res50 import Res50 as net
+        elif model_name == 'SFCN':
+            from SCC_Model.SFCN import SFCN as net
 
         self.CCN = net()
         if len(gpus)>1:
@@ -27,9 +29,6 @@ class CrowdCounter(nn.Module):
         
     @property
     def loss(self):
-        return self.loss_mse
-
-    def f_loss(self):
         return self.loss_mse
     
     def forward(self, img, gt_map):                               

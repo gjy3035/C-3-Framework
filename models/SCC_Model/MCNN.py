@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-from layer import Conv2d
+from misc.layer import Conv2d
 import torch.nn.functional as F
 from misc.utils import *
 

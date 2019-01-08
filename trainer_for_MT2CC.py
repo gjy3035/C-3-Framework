@@ -5,7 +5,7 @@ from torch import optim
 from torch.autograd import Variable
 from torch.optim.lr_scheduler import StepLR
 
-from models.CC import CrowdCounter
+from models.M2TCC import CrowdCounter
 from config import cfg
 from misc.utils import *
 import pdb
@@ -80,13 +80,16 @@ class Trainer():
 
             self.optimizer.zero_grad()
             pred_map = self.net(img, gt_map)
-            loss = self.net.loss
+            loss1,loss2 = self.net.loss
+            loss = loss1+loss2
             loss.backward()
             self.optimizer.step()
 
             if (i + 1) % cfg.PRINT_FREQ == 0:
                 self.i_tb += 1
                 self.writer.add_scalar('train_loss', loss.item(), self.i_tb)
+                self.writer.add_scalar('train_loss1', loss1.item(), self.i_tb)
+                self.writer.add_scalar('train_loss2', loss2.item(), self.i_tb)
                 self.timer['iter time'].toc(average=False)
                 print '[ep %d][it %d][loss %.4f][lr %.4f][%.2fs]' % \
                         (self.epoch + 1, i + 1, loss.item(), self.optimizer.param_groups[0]['lr']*10000, self.timer['iter time'].diff)
@@ -102,6 +105,7 @@ class Trainer():
         mses = AverageMeter()
 
         for vi, data in enumerate(self.val_loader, 0):
+            # print vi
             img, gt_map = data
 
             with torch.no_grad():
@@ -116,8 +120,9 @@ class Trainer():
                 pred_cnt = np.sum(pred_map)/self.cfg_data.LOG_PARA
                 gt_count = np.sum(gt_map)/self.cfg_data.LOG_PARA
 
-                
-                losses.update(self.net.loss.item())
+                loss1,loss2 = self.net.loss
+                loss = loss1.item()+loss2.item()
+                losses.update(loss)
                 maes.update(abs(gt_count-pred_cnt))
                 mses.update((gt_count-pred_cnt)*(gt_count-pred_cnt))
                 if vi==0:

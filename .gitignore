@@ -105,3 +105,4 @@ venv.bak/
 # own ignore
 *.pyc
 exp/
+backup_exp/
