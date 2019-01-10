@@ -22,7 +22,13 @@ class Trainer():
         self.pwd = pwd
 
         self.net_name = cfg.NET
-        self.net = CrowdCounter(cfg.GPU_ID,self.net_name).cuda()
+
+        if self.net_name in ['SANet']:
+            loss_1_fn = nn.MSELoss()
+            from misc import pytorch_ssim
+            loss_2_fn = pytorch_ssim.SSIM(window_size=11)
+
+        self.net = CrowdCounter(cfg.GPU_ID,self.net_name,loss_1_fn,loss_2_fn).cuda()
         self.optimizer = optim.Adam(self.net.CCN.parameters(), lr=cfg.LR, weight_decay=1e-4)
         # self.optimizer = optim.SGD(self.net.parameters(), cfg.LR, momentum=0.95,weight_decay=5e-4)
         self.scheduler = StepLR(self.optimizer, step_size=cfg.NUM_EPOCH_LR_DECAY, gamma=cfg.LR_DECAY)          
