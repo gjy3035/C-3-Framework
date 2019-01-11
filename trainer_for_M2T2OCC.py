@@ -62,7 +62,7 @@ class Trainer():
 
     def pre_max_min_bin_val(self):
         for i, data in enumerate(self.train_loader, 0):
-            if i < 20:
+            if i < 100:
                 # the first 10 epoch use for get the max and min people count
                 _, gt_map = data
 
@@ -79,7 +79,7 @@ class Trainer():
     def pre_weights(self):
         count_class_hist = np.zeros(self.num_classes)
         for i, data in enumerate(self.train_loader, 0):
-            if i < 20:
+            if i < 100:
                 _, gt_map = data
                 for j in range(0, gt_map.shape[0]):
                     temp_count = gt_map[j].sum().data / self.cfg_data.LOG_PARA
