@@ -20,7 +20,7 @@ if __C.DATASET == 'GCC':# only for GCC
 	__C.VAL_MODE = cfg_data.VAL_MODE 
 
 
-__C.NET = 'SANet' # net selection: MCNN, VGG, VGG_DECODER, Res50, CSRNet, SANet
+__C.NET = 'CMTL' # net selection: MCNN, VGG, VGG_DECODER, Res50, CSRNet, SANet
 
 __C.PRE_GCC = False # use the pretrained model on GCC dataset
 __C.PRE_GCC_MODEL = '' # path to model
@@ -36,7 +36,7 @@ __C.MAX_EPOCH = 3000
 
 # multi-task learning weights, no use for single model, such as MCNN, VGG, VGG_DECODER, Res50, CSRNet, and so on
 
-__C.LAMBDA_1 = 1e-3
+__C.LAMBDA_1 = 1e-4# SANet:0.001 CMTL 0.0001
 
 
 # print 

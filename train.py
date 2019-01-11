@@ -46,11 +46,11 @@ net = cfg.NET
 if net in ['MCNN', 'VGG', 'VGG_DECODER', 'Res50', 'CSRNet']:
     from trainer import Trainer
 elif net in ['SANet']: 
-    from trainer_for_MT2CC import Trainer # double losses but signle output
+    from trainer_for_M2TCC import Trainer # double losses but signle output
 elif net in ['CMTL']: 
-    from trainer_for_MT2O2CC import Trainer # double losses and double outputs
+    from trainer_for_M2T2OCC import Trainer # double losses and double outputs
 elif net in ['PCCNet']:
-    from trainer_for_MT3O3CC import Trainer
+    from trainer_for_M3T3OCC import Trainer
 
 #------------Start Training------------
 pwd = os.path.split(os.path.realpath(__file__))[0]

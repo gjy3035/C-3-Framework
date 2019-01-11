@@ -41,7 +41,7 @@ The purpose of this code is an efficient, flexible framework for supervised crow
 | VGG-16 (conv4_3)+decoder |&radic;, ,  | &radic;  |&radic;|&radic;|           |           |
 | ResNet-50 (layer3)       |&radic;, ,  |          |       |&radic;|           |           |
 | CSRNet                   |     |          |&radic;|&radic;|           |           |
-
+| SANet                    |     |          |          |ing        |           |           |
 
 
 
