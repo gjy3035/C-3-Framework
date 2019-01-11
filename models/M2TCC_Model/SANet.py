@@ -3,7 +3,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from misc.utils import *
+from misc.utils import initialize_weights
 import pdb
 
 

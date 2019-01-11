@@ -6,7 +6,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from misc.layer import Conv2d, FC
-from misc.utils import *
+from misc.utils import initialize_weights
 
 
 class CMTL(nn.Module):
@@ -50,6 +50,10 @@ class CMTL(nn.Module):
                                         nn.ConvTranspose2d(16, 8, 4, stride=2, padding=1, output_padding=0, bias=True),
                                         nn.PReLU(),
                                         Conv2d(8, 1, 1, same_padding=True, NL='relu', bn=bn))
+
+        initialize_weights(self.modules())
+
+
 
     def forward(self, im_data):
         x_base = self.base_layer(im_data)
