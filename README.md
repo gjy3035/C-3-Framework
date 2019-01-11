@@ -31,6 +31,7 @@ The purpose of this code is an efficient, flexible framework for supervised crow
 | ResNet-50 (layer3)       |32.4/76.1, , |          |       |7.7/12.6 |           |           |
 | CSRNet                   |     |          |69.3/111.9|10.6/16.6|           |           |
 | SANet                    |     |          |          |         |           |           |
+| CMTL                     |     |          |          |         |           |           |
 
 ##  Progress
 
