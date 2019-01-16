@@ -43,7 +43,7 @@ class Trainer():
 
     def forward(self):
 
-        # self.validate_V1()
+        # self.validate_V2()
         for epoch in range(cfg.MAX_EPOCH):
             self.epoch = epoch
             if epoch > cfg.LR_DECAY_START:
@@ -144,6 +144,7 @@ class Trainer():
 
         roi_mask = []
         from datasets.WE.setting import cfg_data 
+        from scipy import io as sio
         for val_folder in cfg_data.VAL_FOLDER:
 
             roi_mask.append(sio.loadmat(os.path.join(cfg_data.DATA_PATH,'test',val_folder + '_roi.mat'))['BW'])
