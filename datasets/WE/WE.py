@@ -41,9 +41,9 @@ class WE(data.Dataset):
         if img.mode == 'L':
             img = img.convert('RGB')
 
-        den = sio.loadmat(os.path.join(self.gt_path,os.path.splitext(fname)[0] + '.mat'))
-        den = den['map']
-        # den = pd.read_csv(os.path.join(self.gt_path,os.path.splitext(fname)[0] + '.csv'), sep=',',header=None).values
+        # den = sio.loadmat(os.path.join(self.gt_path,os.path.splitext(fname)[0] + '.mat'))
+        # den = den['map']
+        den = pd.read_csv(os.path.join(self.gt_path,os.path.splitext(fname)[0] + '.csv'), sep=',',header=None).values
         
         den = den.astype(np.float32, copy=False)    
         den = Image.fromarray(den)  

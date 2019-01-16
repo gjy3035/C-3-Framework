@@ -127,6 +127,27 @@ def print_summary(exp_name,scores,train_record):
                                                         train_record['best_mse'])
     print '='*50
 
+def print_WE_summary(log_txt,epoch,scores,train_record,c_maes):
+    mae, mse, loss = scores
+    # pdb.set_trace()
+    with open(log_txt, 'a') as f:
+        f.write('='*15 + '+'*15 + '='*15 + '\n')
+        f.write(str(epoch) + '\n\n')
+        f.write('  [mae %.4f], [val loss %.4f]\n\n' % (mae, loss))
+        f.write('    list: ' + str(np.transpose(c_maes.avg)) + '\n')
+
+
+        f.write('='*15 + '+'*15 + '='*15 + '\n\n')
+
+    print '='*50
+    print '    '+ '-'*20
+    print '    [mae %.2f mse %.2f], [val loss %.4f]' % (mae, mse, loss)         
+    print '    '+ '-'*20
+    print '[best] [model: %s] , [mae %.2f], [mse %.2f]' % (train_record['best_model_name'],\
+                                                        train_record['best_mae'],\
+                                                        train_record['best_mse'])
+    print '='*50         
+
 
 def print_GCC_summary(log_txt,epoch, scores,train_record,c_maes,c_mses):
     mae, mse, loss = scores
@@ -150,6 +171,15 @@ def print_GCC_summary(log_txt,epoch, scores,train_record,c_maes,c_mses):
         f.write('    list: ' + str(np.transpose(c_mses['weather']))+ '\n\n')
 
         f.write('='*15 + '+'*15 + '='*15 + '\n\n')
+
+    print '='*50
+    print '    '+ '-'*20
+    print '    [mae %.2f mse %.2f], [val loss %.4f]' % (mae, mse, loss)         
+    print '    '+ '-'*20
+    print '[best] [model: %s] , [mae %.2f], [mse %.2f]' % (train_record['best_model_name'],\
+                                                        train_record['best_mae'],\
+                                                        train_record['best_mse'])
+    print '='*50    
 
 
 def update_model(net,epoch,exp_path,exp_name,scores,train_record,log_file=None):
