@@ -142,9 +142,15 @@ class Trainer():
         losses = AverageCategoryMeter(5)
         maes = AverageCategoryMeter(5)
 
+        roi_mask = []
+        from datasets.WE.setting import cfg_data 
+        for val_folder in cfg_data.VAL_FOLDER:
+
+            roi_mask.append(sio.loadmat(os.path.join(cfg_data.DATA_PATH,'test',val_folder + '_roi.mat'))['BW'])
         
         for i_sub,i_loader in enumerate(self.val_loader,0):
 
+            mask = roi_mask[i_sub]
             for vi, data in enumerate(i_loader, 0):
                 img, gt_map = data
 
@@ -170,9 +176,18 @@ class Trainer():
 
         self.writer.add_scalar('val_loss', loss, self.epoch + 1)
         self.writer.add_scalar('mae', mae, self.epoch + 1)
+        self.writer.add_scalar('mae_s1', maes.avg[0], self.epoch + 1)
+        self.writer.add_scalar('mae_s2', maes.avg[1], self.epoch + 1)
+        self.writer.add_scalar('mae_s3', maes.avg[2], self.epoch + 1)
+        self.writer.add_scalar('mae_s4', maes.avg[3], self.epoch + 1)
+        self.writer.add_scalar('mae_s5', maes.avg[4], self.epoch + 1)
 
         self.train_record = update_model(self.net,self.epoch,self.exp_path,self.exp_name,[mae, 0, loss],self.train_record,self.log_txt)
-        print_summary(self.exp_name,[mae, 0, loss],self.train_record)
+        print_WE_summary(self.log_txt,self.epoch,[mae, 0, loss],self.train_record,maes)
+
+
+
+
 
     def validate_V3(self):# validate_V3 for GCC
 
