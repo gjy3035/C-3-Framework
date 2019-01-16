@@ -7,7 +7,7 @@ import torch
 import random
 
 
-def loading_data(train_mode):
+def loading_data():
     mean_std = cfg_data.MEAN_STD
     log_para = cfg_data.LOG_PARA
     train_main_transform = own_transforms.Compose([
