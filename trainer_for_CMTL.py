@@ -8,7 +8,10 @@ from torch.optim.lr_scheduler import StepLR
 from models.M2T2OCC import CrowdCounter
 from config import cfg
 from misc.utils import *
+
 import pdb
+
+
 
 
 class Trainer():
@@ -48,8 +51,8 @@ class Trainer():
 
         self.train_record = {'best_mae': 1e20, 'best_mse': 1e20, 'best_model_name': ''}
         self.timer = {'iter time': Timer(), 'train time': Timer(), 'val time': Timer()}
-        self.writer, self.log_txt = logger(self.exp_path, self.exp_name, self.pwd, 'exp')
-
+        # self.writer, self.log_txt = logger(self.exp_path, self.exp_name, self.pwd, 'exp')
+        self.log_txt = logger_for_CMTL(self.exp_path, self.exp_name, self.pwd, 'exp')
         self.i_tb = 0
         self.epoch = -1
 
@@ -66,8 +69,8 @@ class Trainer():
                 # the first 10 epoch use for get the max and min people count
                 _, gt_map = data
 
-                for j in range(0, gt_map.shape[0]):
-                    temp_count = gt_map[j].sum().data / self.cfg_data.LOG_PARA
+                for j in range(0, gt_map.size()[0]):
+                    temp_count = gt_map[j].sum() / self.cfg_data.LOG_PARA
                     if temp_count > self.max_gt_count:
                         self.max_gt_count = temp_count
                     elif temp_count < self.min_gt_count:
@@ -81,8 +84,8 @@ class Trainer():
         for i, data in enumerate(self.train_loader, 0):
             if i < 100:
                 _, gt_map = data
-                for j in range(0, gt_map.shape[0]):
-                    temp_count = gt_map[j].sum().data / self.cfg_data.LOG_PARA
+                for j in range(0, gt_map.size()[0]):
+                    temp_count = gt_map[j].sum() / self.cfg_data.LOG_PARA
                     class_idx = np.round(temp_count/self.bin_val)
                     class_idx = int(min(class_idx,self.num_classes-1))
                     count_class_hist[class_idx] += 1
@@ -97,14 +100,14 @@ class Trainer():
 
 
     def online_assign_gt_class_labels(self, gt_map_batch):
-        batch = gt_map_batch.shape[0]
+        batch = gt_map_batch.size()[0]
         # pdb.set_trace()
         label = np.zeros((batch, self.num_classes), dtype=np.int)
 
         for i in range(0, batch):
 
             # pdb.set_trace()
-            gt_count = gt_map_batch[i].sum().item() / self.cfg_data.LOG_PARA
+            gt_count = gt_map_batch[i].sum().data[0] / self.cfg_data.LOG_PARA
 
             # generate gt's label same as implement of CMTL by Viswa
             gt_class_label = np.zeros(self.num_classes, dtype=np.int)
@@ -112,6 +115,7 @@ class Trainer():
             class_idx = np.round(gt_count/bin_val)
             class_idx = int(min(class_idx, self.num_classes-1))
             gt_class_label[class_idx] = 1
+            # pdb.set_trace()
             label[i] = gt_class_label.reshape(1, gt_class_label.shape[0])
 
         return torch.from_numpy(label).float()
@@ -166,15 +170,16 @@ class Trainer():
 
             if (i + 1) % cfg.PRINT_FREQ == 0:
                 self.i_tb += 1
-                self.writer.add_scalar('train_loss', loss.item(), self.i_tb)
-                self.writer.add_scalar('train_loss1', loss1.item(), self.i_tb)
-                self.writer.add_scalar('train_loss2', loss2.item(), self.i_tb)
+                # self.writer.add_scalar('train_loss', loss.data[0], self.i_tb)
+                # self.writer.add_scalar('train_loss1', loss1.data[0], self.i_tb)
+                # self.writer.add_scalar('train_loss2', loss2.data[0], self.i_tb)
                 self.timer['iter time'].toc(average=False)
                 print '[ep %d][it %d][loss %.4f][lr %.4f][%.2fs]' % \
-                        (self.epoch + 1, i + 1, loss.item(), self.optimizer.param_groups[0]['lr'] * 10000,
+                        (self.epoch + 1, i + 1, loss.data[0], self.optimizer.param_groups[0]['lr'] * 10000,
                  self.timer['iter time'].diff)
+                # pdb.set_trace()
                 print '        [cnt: gt: %.1f pred: %.2f]' % (
-                        gt_map[0].sum().data / self.cfg_data.LOG_PARA, pred_map[0].sum().data / self.cfg_data.LOG_PARA)
+                        gt_map[0].sum().data.cpu().numpy()[0] / self.cfg_data.LOG_PARA, pred_map[0].sum().data.cpu().numpy()[0] / self.cfg_data.LOG_PARA)
 
     def validate_V1(self):  # validate_V1 for SHHA, SHHB, UCF-QNRF, UCF50
 
@@ -187,36 +192,36 @@ class Trainer():
         for vi, data in enumerate(self.val_loader, 0):
             img, gt_map = data
 
-            with torch.no_grad():
-                img = Variable(img).cuda()
-                gt_map = Variable(gt_map).cuda()
+            # with torch.no_grad():
+            img = Variable(img, volatile=True).cuda()
+            gt_map = Variable(gt_map, volatile=True).cuda()
 
-                gt_label = self.online_assign_gt_class_labels(gt_map)
-                gt_label = Variable(gt_label).cuda()
+            gt_label = self.online_assign_gt_class_labels(gt_map)
+            gt_label = Variable(gt_label).cuda()
 
-                pred_map = self.net.forward(img, gt_map, gt_label)
+            pred_map = self.net.forward(img, gt_map, gt_label)
 
-                pred_map = pred_map.data.cpu().numpy()
-                gt_map = gt_map.data.cpu().numpy()
+            pred_map = pred_map.data.cpu().numpy()
+            gt_map = gt_map.data.cpu().numpy()
 
-                pred_cnt = np.sum(pred_map) / self.cfg_data.LOG_PARA
-                gt_count = np.sum(gt_map) / self.cfg_data.LOG_PARA
+            pred_cnt = np.sum(pred_map) / self.cfg_data.LOG_PARA
+            gt_count = np.sum(gt_map) / self.cfg_data.LOG_PARA
 
-                loss1,loss2 = self.net.loss
-                loss = loss1.item()+loss2.item()
-                losses.update(loss)
-                maes.update(abs(gt_count - pred_cnt))
-                mses.update((gt_count - pred_cnt) * (gt_count - pred_cnt))
-                if vi == 0:
-                    vis_results(self.exp_name, self.epoch, self.writer, self.restore_transform, img, pred_map, gt_map)
+            loss1,loss2 = self.net.loss
+            loss = loss1.data[0]+loss2.data[0]
+            losses.update(loss)
+            maes.update(abs(gt_count - pred_cnt))
+            mses.update((gt_count - pred_cnt) * (gt_count - pred_cnt))
+            # if vi == 0:
+            #     vis_results(self.exp_name, self.epoch, self.writer, self.restore_transform, img, pred_map, gt_map)
 
         mae = maes.avg
         mse = np.sqrt(mses.avg)
         loss = losses.avg
 
-        self.writer.add_scalar('val_loss', loss, self.epoch + 1)
-        self.writer.add_scalar('mae', mae, self.epoch + 1)
-        self.writer.add_scalar('mse', mse, self.epoch + 1)
+        # self.writer.add_scalar('val_loss', loss, self.epoch + 1)
+        # self.writer.add_scalar('mae', mae, self.epoch + 1)
+        # self.writer.add_scalar('mse', mse, self.epoch + 1)
 
         self.train_record = update_model(self.net, self.epoch, self.exp_path, self.exp_name, [mae, mse, loss],
                                          self.train_record, self.log_txt)
@@ -246,17 +251,17 @@ class Trainer():
                     pred_cnt = np.sum(pred_map) / self.cfg_data.LOG_PARA
                     gt_count = np.sum(gt_map) / self.cfg_data.LOG_PARA
 
-                    losses.update(self.net.loss.item(), i_sub)
+                    losses.update(self.net.loss.data[0], i_sub)
                     maes.update(abs(gt_count - pred_cnt), i_sub)
-                    if vi == 0:
-                        vis_results(self.exp_name, self.epoch, self.writer, self.restore_transform, img, pred_map,
-                                    gt_map)
+                    # if vi == 0:
+                    #     vis_results(self.exp_name, self.epoch, self.writer, self.restore_transform, img, pred_map,
+                    #                 gt_map)
 
         mae = np.average(maes.avg)
         loss = np.average(losses.avg)
 
-        self.writer.add_scalar('val_loss', loss, self.epoch + 1)
-        self.writer.add_scalar('mae', mae, self.epoch + 1)
+        # self.writer.add_scalar('val_loss', loss, self.epoch + 1)
+        # self.writer.add_scalar('mae', mae, self.epoch + 1)
 
         self.train_record = update_model(self.net, self.epoch, self.exp_path, self.exp_name, [mae, 0, loss],
                                          self.train_record, self.log_txt)
@@ -290,7 +295,7 @@ class Trainer():
                 s_mae = abs(gt_count - pred_cnt)
                 s_mse = (gt_count - pred_cnt) * (gt_count - pred_cnt)
 
-                losses.update(self.net.loss.item())
+                losses.update(self.net.loss.data[0])
                 maes.update(s_mae)
                 mses.update(s_mse)
                 c_maes['level'].update(s_mae, attributes_pt[i_img][0])
@@ -300,16 +305,16 @@ class Trainer():
                 c_maes['weather'].update(s_mae, attributes_pt[i_img][2])
                 c_mses['weather'].update(s_mse, attributes_pt[i_img][2])
 
-                if vi == 0:
-                    vis_results(self.exp_name, self.epoch, self.writer, self.restore_transform, img, pred_map, gt_map)
+                # if vi == 0:
+                #     vis_results(self.exp_name, self.epoch, self.writer, self.restore_transform, img, pred_map, gt_map)
 
         loss = losses.avg
         mae = maes.avg
         mse = np.sqrt(mses.avg)
 
-        self.writer.add_scalar('val_loss', loss, self.epoch + 1)
-        self.writer.add_scalar('mae', mae, self.epoch + 1)
-        self.writer.add_scalar('mse', mse, self.epoch + 1)
+        # self.writer.add_scalar('val_loss', loss, self.epoch + 1)
+        # self.writer.add_scalar('mae', mae, self.epoch + 1)
+        # self.writer.add_scalar('mse', mse, self.epoch + 1)
 
         self.train_record = update_model(self.net, self.epoch, self.exp_path, self.exp_name, [mae, mse, loss],
                                          self.train_record, self.log_txt)
@@ -318,6 +323,7 @@ class Trainer():
         c_mses['time'] = np.sqrt(c_mses['time'].avg)
         c_mses['weather'] = np.sqrt(c_mses['weather'].avg)
         print_GCC_summary(self.exp_name, [mae, mse, loss], self.train_record, c_maes, c_mses)
+
 
 
 

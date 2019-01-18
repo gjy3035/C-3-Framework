@@ -38,7 +38,7 @@ The purpose of this code is an efficient, flexible framework for supervised crow
 |                          | GCC | UCF-QNRF | SHT A | SHT B | WorldExpo | UCF_CC_50 |
 |--------------------------|-----|----------|-------|-------|-----------|-----------|
 | MCNN (RGB Image)         |     |  &radic; |&radic;|&radic;|           |           |
-| VGG-16 (conv4_3)         |&radic;, ,&radic;| &radic;  |&radic;|&radic;|           |           |
+| VGG-16 (conv4_3)         |&radic;, ,&radic;| &radic;  |&radic;|&radic;|  ing      |           |
 | VGG-16 (conv4_3)+decoder |&radic;, ,&radic;| &radic;  |&radic;|&radic;|           |           |
 | ResNet-50 (layer3)       |&radic;, ,&radic;|          |       |&radic;|           |           |
 | CSRNet                   |     |          |&radic;|&radic;|           |           |

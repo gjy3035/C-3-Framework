@@ -51,7 +51,7 @@ class CMTL(nn.Module):
                                         nn.PReLU(),
                                         Conv2d(8, 1, 1, same_padding=True, NL='relu', bn=bn))
 
-        initialize_weights(self.modules())
+        # initialize_weights(self.modules())
 
 
 

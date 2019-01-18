@@ -1,6 +1,5 @@
 import numpy as np
 import os
-import pdb
 import math
 import time
 import random
@@ -8,10 +7,10 @@ import shutil
 
 import torch
 from torch import nn
+
+
 import torchvision.utils as vutils
 import torchvision.transforms as standard_transforms
-
-from tensorboardX import SummaryWriter
 
 import pdb
 
@@ -59,6 +58,8 @@ def weights_normal_init(*models):
 
 
 def logger(exp_path, exp_name, work_dir, exception):
+
+    from tensorboardX import SummaryWriter
     
     if not os.path.exists(exp_path):
         os.mkdir(exp_path)
@@ -69,7 +70,7 @@ def logger(exp_path, exp_name, work_dir, exception):
     cfg_lines = cfg_file.readlines()
     
     with open(log_file, 'a') as f:
-            f.write(''.join(cfg_lines) + '\n\n\n\n')
+        f.write(''.join(cfg_lines) + '\n\n\n\n')
 
 
     copy_cur_env(work_dir, exp_path+ '/' + exp_name + '/code', exception)
@@ -77,6 +78,28 @@ def logger(exp_path, exp_name, work_dir, exception):
 
     return writer, log_file
 
+
+
+def logger_for_CMTL(exp_path, exp_name, work_dir, exception):
+    
+    if not os.path.exists(exp_path):
+        os.mkdir(exp_path)
+
+    if not os.path.exists(exp_path+ '/' + exp_name):
+        os.mkdir(exp_path+ '/' + exp_name)
+    log_file = exp_path + '/' + exp_name + '/' + exp_name + '.txt'
+    
+    cfg_file = open('./config.py',"r")  
+    cfg_lines = cfg_file.readlines()
+    
+    with open(log_file, 'a') as f:
+        f.write(''.join(cfg_lines) + '\n\n\n\n')
+
+
+    copy_cur_env(work_dir, exp_path+ '/' + exp_name + '/code', exception)
+
+
+    return log_file
 
 def logger_txt(log_file,epoch,scores):
 

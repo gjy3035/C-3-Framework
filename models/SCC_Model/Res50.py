@@ -18,7 +18,7 @@ class Res50(nn.Module):
         self.de_pred = nn.Sequential(Conv2d(1024, 128, 1, same_padding=True, NL='relu'),
                                      Conv2d(128, 1, 1, same_padding=True, NL='relu'))
 
-        # initialize_weights(self.modules())
+        initialize_weights(self.modules())
 
         res = models.resnet50()
         pre_wts = torch.load(model_path)

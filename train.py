@@ -3,7 +3,6 @@ import numpy as np
 import torch
 
 from config import cfg
-from trainer import Trainer
 
 #------------prepare enviroment------------
 seed = cfg.SEED
@@ -48,7 +47,7 @@ if net in ['MCNN', 'VGG', 'VGG_DECODER', 'Res50', 'CSRNet']:
 elif net in ['SANet']: 
     from trainer_for_M2TCC import Trainer # double losses but signle output
 elif net in ['CMTL']: 
-    from trainer_for_M2T2OCC import Trainer # double losses and double outputs
+    from trainer_for_CMTL import Trainer # double losses and double outputs
 elif net in ['PCCNet']:
     from trainer_for_M3T3OCC import Trainer
 
