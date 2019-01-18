@@ -174,8 +174,8 @@ class Trainer():
                 # self.writer.add_scalar('train_loss1', loss1.data[0], self.i_tb)
                 # self.writer.add_scalar('train_loss2', loss2.data[0], self.i_tb)
                 self.timer['iter time'].toc(average=False)
-                print '[ep %d][it %d][loss %.4f][lr %.4f][%.2fs]' % \
-                        (self.epoch + 1, i + 1, loss.data[0], self.optimizer.param_groups[0]['lr'] * 10000,
+                print '[ep %d][it %d][loss %.8f, %.8f, %.8f][lr %.4f][%.2fs]' % \
+                        (self.epoch + 1, i + 1, loss.data[0],loss1.data[0],loss2.data[0], self.optimizer.param_groups[0]['lr'] * 10000,
                  self.timer['iter time'].diff)
                 # pdb.set_trace()
                 print '        [cnt: gt: %.1f pred: %.2f]' % (
