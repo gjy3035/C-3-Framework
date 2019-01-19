@@ -49,7 +49,7 @@ class Trainer():
 
     def forward(self):
 
-        # self.validate_V1()
+        # self.validate_V3()
         for epoch in range(cfg.MAX_EPOCH):
             self.epoch = epoch
             if epoch > cfg.LR_DECAY_START:
@@ -189,6 +189,7 @@ class Trainer():
         self.train_record = update_model(self.net,self.epoch,self.exp_path,self.exp_name,[mae, 0, loss],self.train_record,self.log_txt)
         print_summary(self.exp_name,[mae, 0, loss],self.train_record)
 
+
     def validate_V3(self):# validate_V3 for GCC
 
         self.net.eval()
@@ -220,7 +221,9 @@ class Trainer():
                 s_mae = abs(gt_count-pred_cnt)
                 s_mse = (gt_count-pred_cnt)*(gt_count-pred_cnt)
 
-                losses.update(self.net.loss.item())
+                loss1,loss2 = self.net.loss
+                loss = loss1.item()+loss2.item()
+                losses.update(loss)
                 maes.update(s_mae)
                 mses.update(s_mse)   
                 attributes_pt = attributes_pt.squeeze() 
