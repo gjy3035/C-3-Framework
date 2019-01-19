@@ -102,6 +102,9 @@ class Trainer():
                 print '        [cnt: gt: %.1f pred: %.2f]' % (gt_map[0].sum().data/self.cfg_data.LOG_PARA, pred_map[0].sum().data/self.cfg_data.LOG_PARA)            
 
 
+
+
+
     def validate_V1(self):# validate_V1 for SHHA, SHHB, UCF-QNRF, UCF50
 
         self.net.eval()
@@ -113,6 +116,7 @@ class Trainer():
         for vi, data in enumerate(self.val_loader, 0):
             # print vi
             img, gt_map = data
+
 
             with torch.no_grad():
                 img = Variable(img).cuda()

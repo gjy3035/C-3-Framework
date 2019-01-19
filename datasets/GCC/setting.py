@@ -6,7 +6,7 @@ __C_GCC = edict()
 cfg_data = __C_GCC
 
 __C_GCC.STD_SIZE = (544,960)
-__C_GCC.TRAIN_SIZE = (480,848)
+__C_GCC.TRAIN_SIZE = (272,480)
 __C_GCC.DATA_PATH = '../ProcessedData/GCC'
 
 __C_GCC.VAL_MODE = 'rd' # rd: radomn splitting; cc: cross camera; cl: cross location

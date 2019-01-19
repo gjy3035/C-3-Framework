@@ -6,6 +6,8 @@ from scipy import io as sio
 from torch.utils import data
 import pdb
 
+import pandas as pd
+
 from setting import cfg_data 
 
 class GCC(data.Dataset):
@@ -66,10 +68,13 @@ class GCC(data.Dataset):
         # print self.file_folder[index] + ' ' + self.file_name[index] + ' ' + self.gt_cnt[index]
         img_path = os.path.join(cfg_data.DATA_PATH+self.file_folder[index], 'pngs_544_960', self.file_name[index]+'.png')
 
-        den_map_path = os.path.join(cfg_data.DATA_PATH+self.file_folder[index], 'den_maps_' + cfg_data.DATA_GT +'_544_960', self.file_name[index]+'.mat')
+        den_map_path = os.path.join(cfg_data.DATA_PATH+self.file_folder[index], 'csv_den_maps_' + cfg_data.DATA_GT +'_544_960', self.file_name[index]+'.csv')
 
         img = Image.open(img_path)
-        den_map = sio.loadmat(den_map_path)['den_map'] 
+
+        den_map = pd.read_csv(den_map_path, sep=',',header=None).values
+
+        # den_map = sio.loadmat(den_map_path)['den_map'] 
 
         den_map = den_map.astype(np.float32, copy=False)
 

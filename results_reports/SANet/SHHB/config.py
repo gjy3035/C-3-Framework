@@ -9,7 +9,7 @@ cfg = __C
 
 #------------------------------TRAIN------------------------
 __C.SEED = 3035 # random seed,  for reporduction
-__C.DATASET = 'GCC' # dataset selection: GCC, SHHA, SHHB, UCF50, QNRF, WE
+__C.DATASET = 'SHHB' # dataset selection: GCC, SHHA, SHHB, UCF50, QNRF, WE
 
 if __C.DATASET == 'UCF50':# only for UCF50
 	from datasets.UCF50.setting import cfg_data
@@ -36,7 +36,7 @@ __C.MAX_EPOCH = 3000
 
 # multi-task learning weights, no use for single model, such as MCNN, VGG, VGG_DECODER, Res50, CSRNet, and so on
 
-__C.LAMBDA_1 = 1e-3# SANet:0.001 CMTL 0.0001
+__C.LAMBDA_1 = 1e-3
 
 
 # print 
@@ -59,7 +59,7 @@ __C.EXP_PATH = './exp' # the path of logs, checkpoints, and current codes
 
 
 #------------------------------VAL------------------------
-__C.VAL_DENSE_START = 100
+__C.VAL_DENSE_START = 200
 __C.VAL_FREQ = 10 # Before __C.VAL_DENSE_START epoches, the freq is set as __C.VAL_FREQ
 
 #------------------------------VIS------------------------
