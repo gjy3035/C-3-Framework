@@ -21,7 +21,7 @@ The purpose of this code is an efficient, flexible framework for supervised crow
 - **Powerful log**. It does not only record the loss, visulization in Tensorboard, but also save the current code package (including parameters settings). The saved code package can be directly ran to reproduce the experiments at any time. You won't be bothered by forgetting the parameters.
 
 
-##  Performance
+## Performance
 Due to linmited spare time and the number of GPUs, I do not plan to conduct some experiments (named as "TBD"). If you are intested in the project, you are welcome to submit your own experimental parameters and results.
 
 |          Method          |         GCC(rd,cc,cl)             | UCF-QNRF  |   SHT A   |  SHT B  |
@@ -34,7 +34,7 @@ Due to linmited spare time and the number of GPUs, I do not plan to conduct some
 | SANet                    |  42.4/85.4, ing                   |    TBD    |    TBD    |12.1/19.2|
 | CMTL                     |                                   |    TBD    |    TBD    |   ing   |
 | SFCN                     |                                   |           |           |         |
-| SFCN$\dag$               |                                   |           |           |         |
+| SFCN $\dag$              |                                   |           |           |         |
 
 
 |          Method          | WE |UCF50|
@@ -46,7 +46,8 @@ Due to linmited spare time and the number of GPUs, I do not plan to conduct some
 | CSRNet                   |TBD | TBD |
 | SANet                    |TBD | TBD |
 | CMTL                     |TBD | TBD |
-
+| SFCN                     |    |     |
+| SFCN $\dag$              |    |     |
 
 
 ### data processing code
@@ -57,4 +58,39 @@ Due to linmited spare time and the number of GPUs, I do not plan to conduct some
 - [x] WorldExpo'10
 - [x] UCF_CC_50
 
+
+## Getting Started
+
+### Preparation
+- Prerequisites
+  - Python 2.7
+  - Pytorch 1.0 (some networks only suport 0.4): http://pytorch.org .
+  - other libs in ```requirements.txt```, run ```pip install -r requirements.txt```.
+
+
+- Installation
+  - Clone this repo:
+   ```
+   git clone https://github.com/gjy3035/C-3-Framework.git
+   ```
+
+- Data Preparation
+ - In ```./datasets/XXX/readme.md```, download our processed dataset or run the ```prepare_XXX.m/.py``` to generate the desity maps. If you want to directly download all processeed data (including Shanghai Tech, UCF-QNRF, UCF_CC_50 and WorldExpo'10), please visit the [**link**](https://mailnwpueducn-my.sharepoint.com/:f:/g/personal/gjy3035_mail_nwpu_edu_cn/EkxvOVJBVuxPsu75YfYhv9UBKRFNP7WgLdxXFMSeHGhXjQ?e=IdyAzA).
+ - Place the processed data to ```../ProcessedData```.
+
+- Pretrained Model
+ - Some Counting Networks (such as VGG, CSRNet and so on) adopt the pre-trained models on ImageNet. You can download them from [the repo of TorchVision]( https://github.com/pytorch/vision/tree/master/torchvision/models)
+ - Place the processed data to ```../PyTorch_Pretrained```.
+
+- Folder Tree
++-- C-3-Framework
+|   +-- datasets
+|   +-- misc
+|   +-- ......
++-- ProcessedData
+|   +-- shanghaitech_part_A
+|   +-- ......
++-- PyTorch_Pretrained
+|   +-- resnet50-19c8e357.pth
+|   +-- ......
 
