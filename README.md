@@ -24,17 +24,17 @@ The purpose of this code is an efficient, flexible framework for supervised crow
 ## Performance
 Due to linmited spare time and the number of GPUs, I do not plan to conduct some experiments (named as "TBD"). If you are intested in the project, you are welcome to submit your own experimental parameters and results.
 
-|          Method          |         GCC(rd,cc,cl)             | UCF-QNRF  |   SHT A   |  SHT B  |
-|--------------------------|-----------------------------------|-----------|-----------|---------|
-| MCNN (RGB Image)         |102.2/238.3, ing                   |243.5/364.7|110.6/171.1|23.9/42.7|
-| VGG-16 (conv4_3)         |  36.6/88.9, 57.6/133.9, 91.4/222.0|119.3/207.7|71.4/115.7 |10.3/16.5|
-| VGG-16 (conv4_3)+decoder |  37.2/91.2, 56.9/138.3, 88.9/220.9|115.2/189.6|71.5/117.6 |10.5/17.4|
-| ResNet-50 (layer3)       |  32.4/76.1, 54.5/129.7, 78.3/201.6|    TBD    |    TBD    |7.7/12.6 |
-| CSRNet                   |                                   |    TBD    |69.3/111.9 |10.6/16.6|
-| SANet                    |  42.4/85.4, ing                   |    TBD    |    TBD    |12.1/19.2|
-| CMTL                     |                                   |    TBD    |    TBD    |   ing   |
-| SFCN                     |                                   |           |           |         |
-| SFCN $\dag$              |                                   |           |           |         |
+|          Method          |           GCC(rd,cc,cl)             | UCF-QNRF  |   SHT A   |  SHT B  |
+|--------------------------|-------------------------------------|-----------|-----------|---------|
+| MCNN (RGB Image)         |102.2/238.3,  ing       , 176.1/373.9|243.5/364.7|110.6/171.1|23.9/42.7|
+| VGG-16 (conv4_3)         |  36.6/88.9,  57.6/133.9,  91.4/222.0|119.3/207.7|71.4/115.7 |10.3/16.5|
+| VGG-16 (conv4_3)+decoder |  37.2/91.2,  56.9/138.3,  88.9/220.9|115.2/189.6|71.5/117.6 |10.5/17.4|
+| ResNet-50 (layer3)       |  32.4/76.1,  54.5/129.7,  78.3/201.6|    TBD    |    TBD    |7.7/12.6 |
+| CSRNet                   |                                     |    TBD    |69.3/111.9 |10.6/16.6|
+| SANet                    |  42.4/85.4,  ing                    |    TBD    |    TBD    |12.1/19.2|
+| CMTL                     |                                     |    TBD    |    TBD    |   ing   |
+| SFCN                     |                                     |           |           |         |
+| SFCN $\dag$              |                                     |           |           |         |
 
 
 |          Method          | WE |UCF50|
@@ -79,7 +79,7 @@ Due to linmited spare time and the number of GPUs, I do not plan to conduct some
   - Place the processed data to ```../ProcessedData```.
 
 - Pretrained Model
-  - Some Counting Networks (such as VGG, CSRNet and so on) adopt the pre-trained models on ImageNet. You can download them from [the repo of TorchVision]( https://github.com/pytorch/vision/tree/master/torchvision/models)
+  - Some Counting Networks (such as VGG, CSRNet and so on) adopt the pre-trained models on ImageNet. You can download them from [TorchVision](https://github.com/pytorch/vision/tree/master/torchvision/models)
   - Place the processed data to ```../PyTorch_Pretrained```.
 
 - Folder Tree
