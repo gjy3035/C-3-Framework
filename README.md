@@ -75,14 +75,15 @@ Due to linmited spare time and the number of GPUs, I do not plan to conduct some
    ```
 
 - Data Preparation
- - In ```./datasets/XXX/readme.md```, download our processed dataset or run the ```prepare_XXX.m/.py``` to generate the desity maps. If you want to directly download all processeed data (including Shanghai Tech, UCF-QNRF, UCF_CC_50 and WorldExpo'10), please visit the [**link**](https://mailnwpueducn-my.sharepoint.com/:f:/g/personal/gjy3035_mail_nwpu_edu_cn/EkxvOVJBVuxPsu75YfYhv9UBKRFNP7WgLdxXFMSeHGhXjQ?e=IdyAzA).
- - Place the processed data to ```../ProcessedData```.
+  - In ```./datasets/XXX/readme.md```, download our processed dataset or run the ```prepare_XXX.m/.py``` to generate the desity maps. If you want to directly download all processeed data (including Shanghai Tech, UCF-QNRF, UCF_CC_50 and WorldExpo'10), please visit the [**link**](https://mailnwpueducn-my.sharepoint.com/:f:/g/personal/gjy3035_mail_nwpu_edu_cn/EkxvOVJBVuxPsu75YfYhv9UBKRFNP7WgLdxXFMSeHGhXjQ?e=IdyAzA).
+  - Place the processed data to ```../ProcessedData```.
 
 - Pretrained Model
- - Some Counting Networks (such as VGG, CSRNet and so on) adopt the pre-trained models on ImageNet. You can download them from [the repo of TorchVision]( https://github.com/pytorch/vision/tree/master/torchvision/models)
- - Place the processed data to ```../PyTorch_Pretrained```.
+  - Some Counting Networks (such as VGG, CSRNet and so on) adopt the pre-trained models on ImageNet. You can download them from [the repo of TorchVision]( https://github.com/pytorch/vision/tree/master/torchvision/models)
+  - Place the processed data to ```../PyTorch_Pretrained```.
 
 - Folder Tree
+```
 +-- C-3-Framework
 |   +-- datasets
 |   +-- misc
@@ -93,4 +94,5 @@ Due to linmited spare time and the number of GPUs, I do not plan to conduct some
 +-- PyTorch_Pretrained
 |   +-- resnet50-19c8e357.pth
 |   +-- ......
+```
 
