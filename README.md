@@ -70,9 +70,9 @@ Due to linmited spare time and the number of GPUs, I do not plan to conduct some
 
 - Installation
   - Clone this repo:
-   ```
-   git clone https://github.com/gjy3035/C-3-Framework.git
-   ```
+    ```
+    git clone https://github.com/gjy3035/C-3-Framework.git
+    ```
 
 - Data Preparation
   - In ```./datasets/XXX/readme.md```, download our processed dataset or run the ```prepare_XXX.m/.py``` to generate the desity maps. If you want to directly download all processeed data (including Shanghai Tech, UCF-QNRF, UCF_CC_50 and WorldExpo'10), please visit the [**link**](https://mailnwpueducn-my.sharepoint.com/:f:/g/personal/gjy3035_mail_nwpu_edu_cn/EkxvOVJBVuxPsu75YfYhv9UBKRFNP7WgLdxXFMSeHGhXjQ?e=IdyAzA).
@@ -83,16 +83,17 @@ Due to linmited spare time and the number of GPUs, I do not plan to conduct some
   - Place the processed data to ```../PyTorch_Pretrained```.
 
 - Folder Tree
-```
-+-- C-3-Framework
-|   +-- datasets
-|   +-- misc
-|   +-- ......
-+-- ProcessedData
-|   +-- shanghaitech_part_A
-|   +-- ......
-+-- PyTorch_Pretrained
-|   +-- resnet50-19c8e357.pth
-|   +-- ......
-```
+
+    ```
+    +-- C-3-Framework
+    |   +-- datasets
+    |   +-- misc
+    |   +-- ......
+    +-- ProcessedData
+    |   +-- shanghaitech_part_A
+    |   +-- ......
+    +-- PyTorch_Pretrained
+    |   +-- resnet50-19c8e357.pth
+    |   +-- ......
+    ```
 
