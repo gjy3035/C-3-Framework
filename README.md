@@ -31,7 +31,7 @@ Due to linmited spare time and the number of GPUs, I do not plan to conduct some
 | VGG-16 (conv4_3)+decoder |  37.2/91.2, 56.9/138.3, 88.9/220.9|115.2/189.6|71.5/117.6 |10.5/17.4|
 | ResNet-50 (layer3)       |  32.4/76.1, 54.5/129.7, 78.3/201.6|    TBD    |    TBD    |7.7/12.6 |
 | CSRNet                   |                                   |    TBD    |69.3/111.9 |10.6/16.6|
-| SANet                    |ing                                |    TBD    |    TBD    |12.1/19.2|
+| SANet                    |  42.4/85.4, ing                   |    TBD    |    TBD    |12.1/19.2|
 | CMTL                     |                                   |    TBD    |    TBD    |   ing   |
 | SFCN                     |                                   |           |           |         |
 | SFCN$\dag$               |                                   |           |           |         |
