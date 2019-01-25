@@ -6,10 +6,10 @@ __C_GCC = edict()
 cfg_data = __C_GCC
 
 __C_GCC.STD_SIZE = (544,960)
-__C_GCC.TRAIN_SIZE = (272,480)
-__C_GCC.DATA_PATH = '../ProcessedData/GCC'
-
-__C_GCC.VAL_MODE = 'cl' # rd: radomn splitting; cc: cross camera; cl: cross location
+__C_GCC.TRAIN_SIZE = (480,848)
+# lite__C_GCC.DATA_PATH = '../ProcessedData/GCC'
+__C_GCC.DATA_PATH = '/media/D/ht/ProcessedData'
+__C_GCC.VAL_MODE = 'cc' # rd: radomn splitting; cc: cross camera; cl: cross location
 
 __C_GCC.DATA_GT = 'k15_s4'            
 
@@ -19,7 +19,7 @@ __C_GCC.LABEL_FACTOR = 1
 __C_GCC.LOG_PARA = 100.
 
 __C_GCC.RESUME_MODEL = ''#model path
-__C_GCC.TRAIN_BATCH_SIZE = 12 #imgs
+__C_GCC.TRAIN_BATCH_SIZE = 32 #imgs
 
 __C_GCC.VAL_BATCH_SIZE = 1 #
 
