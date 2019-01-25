@@ -43,7 +43,7 @@ class Trainer():
 
     def forward(self):
 
-        # self.validate_V2()
+        self.validate_V3()
         for epoch in range(cfg.MAX_EPOCH):
             self.epoch = epoch
             if epoch > cfg.LR_DECAY_START:
@@ -214,23 +214,25 @@ class Trainer():
 
                 pred_map = pred_map.data.cpu().numpy()
                 gt_map = gt_map.data.cpu().numpy()
+
+                for i_img in range(pred_map.shape[0]):
                 
-                pred_cnt = np.sum(pred_map)/self.cfg_data.LOG_PARA
-                gt_count = np.sum(gt_map)/self.cfg_data.LOG_PARA
+                    pred_cnt = np.sum(pred_map[i_img])/self.cfg_data.LOG_PARA
+                    gt_count = np.sum(gt_map[i_img])/self.cfg_data.LOG_PARA
 
-                s_mae = abs(gt_count-pred_cnt)
-                s_mse = (gt_count-pred_cnt)*(gt_count-pred_cnt)
+                    s_mae = abs(gt_count-pred_cnt)
+                    s_mse = (gt_count-pred_cnt)*(gt_count-pred_cnt)
 
-                losses.update(self.net.loss.item())
-                maes.update(s_mae)
-                mses.update(s_mse)   
-                attributes_pt = attributes_pt.squeeze() 
-                c_maes['level'].update(s_mae,attributes_pt[0])
-                c_mses['level'].update(s_mse,attributes_pt[0])
-                c_maes['time'].update(s_mae,attributes_pt[1]/3)
-                c_mses['time'].update(s_mse,attributes_pt[1]/3)
-                c_maes['weather'].update(s_mae,attributes_pt[2])
-                c_mses['weather'].update(s_mse,attributes_pt[2])
+                    losses.update(self.net.loss.item())
+                    maes.update(s_mae)
+                    mses.update(s_mse)   
+                    attributes_pt = attributes_pt.squeeze() 
+                    c_maes['level'].update(s_mae,attributes_pt[0])
+                    c_mses['level'].update(s_mse,attributes_pt[0])
+                    c_maes['time'].update(s_mae,attributes_pt[1]/3)
+                    c_mses['time'].update(s_mse,attributes_pt[1]/3)
+                    c_maes['weather'].update(s_mae,attributes_pt[2])
+                    c_mses['weather'].update(s_mse,attributes_pt[2])
 
 
                 if vi==0:
