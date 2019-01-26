@@ -17,6 +17,8 @@ class CrowdCounter(nn.Module):
             from SCC_Model.CSRNet import CSRNet as net
         elif model_name == 'Res50':
             from SCC_Model.Res50 import Res50 as net
+        elif model_name == 'Res101':
+            from SCC_Model.Res101 import Res101 as net            
         elif model_name == 'SFCN':
             from SCC_Model.SFCN import SFCN as net
 

@@ -40,9 +40,9 @@ elif data_mode is 'GCC':
     from datasets.GCC.setting import cfg_data 
 
 
-#------------prepare net------------
+#------------Prepare Trainer------------
 net = cfg.NET
-if net in ['MCNN', 'VGG', 'VGG_DECODER', 'Res50', 'CSRNet']:
+if net in ['MCNN', 'VGG', 'VGG_DECODER', 'Res50', 'Res101', 'CSRNet']:
     from trainer import Trainer
 elif net in ['SANet']: 
     from trainer_for_M2TCC import Trainer # double losses but signle output

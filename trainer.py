@@ -43,7 +43,7 @@ class Trainer():
 
     def forward(self):
 
-        self.validate_V3()
+        # self.validate_V3()
         for epoch in range(cfg.MAX_EPOCH):
             self.epoch = epoch
             if epoch > cfg.LR_DECAY_START:
@@ -227,12 +227,12 @@ class Trainer():
                     maes.update(s_mae)
                     mses.update(s_mse)   
                     attributes_pt = attributes_pt.squeeze() 
-                    c_maes['level'].update(s_mae,attributes_pt[0])
-                    c_mses['level'].update(s_mse,attributes_pt[0])
-                    c_maes['time'].update(s_mae,attributes_pt[1]/3)
-                    c_mses['time'].update(s_mse,attributes_pt[1]/3)
-                    c_maes['weather'].update(s_mae,attributes_pt[2])
-                    c_mses['weather'].update(s_mse,attributes_pt[2])
+                    c_maes['level'].update(s_mae,attributes_pt[i_img][0])
+                    c_mses['level'].update(s_mse,attributes_pt[i_img][0])
+                    c_maes['time'].update(s_mae,attributes_pt[i_img][1]/3)
+                    c_mses['time'].update(s_mse,attributes_pt[i_img][1]/3)
+                    c_maes['weather'].update(s_mae,attributes_pt[i_img][2])
+                    c_mses['weather'].update(s_mse,attributes_pt[i_img][2])
 
 
                 if vi==0:
