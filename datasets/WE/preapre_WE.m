@@ -111,7 +111,7 @@ for idx = 1:size(img_list,1)
     if (mod(idx,10)==0)
         fprintf(1,'Train: Processing %3d/%d files\n', idx, size(img_list,1));
     end
-    load(strcat(label_path, filename_no_ext, '.mat'));
+    load(strcat(label_path, folderName,'/', filename_no_ext, '.mat'));
     input_img_name = strcat(path,filename);
     im = imread(input_img_name);  
     [h, w, c] = size(im);
