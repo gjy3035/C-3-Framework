@@ -43,12 +43,10 @@ class UCF50(data.Dataset):
         if self.img_transform is not None:
             img = self.img_transform(img)
 
-        gt_count = torch.from_numpy(np.array(den)).sum() 
-
         if self.gt_transform is not None:
             den = self.gt_transform(den)      
             
-        return img, den, gt_count
+        return img, den
 
     def __len__(self):
         return self.num_samples
@@ -57,14 +55,12 @@ class UCF50(data.Dataset):
         img = Image.open(os.path.join(self.img_path,self.img_files[index]))
         if img.mode == 'L':
             img = img.convert('RGB')
-        wd_1, ht_1 = img.size
 
         den = pd.read_csv(os.path.join(self.gt_path,self.gt_files[index]), sep=',',header=None).values
-        den = den.astype(np.float32, copy=False)          
+        den = den.astype(np.float32, copy=False)
+        den = Image.fromarray(den)
         
         return img, den
-
-                
 
 
     def get_num_samples(self):
