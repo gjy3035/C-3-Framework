@@ -71,7 +71,7 @@ def SHHA_collate(batch):
 
 def get_train_folder(val_folder):
     all_folder = [1,2,3,4,5]
-    del all_folder[val_folder]
+    del all_folder[val_folder-1]
 
     return all_folder
 
@@ -99,7 +99,7 @@ def loading_data():
     train_set = UCF50(cfg_data.DATA_PATH, train_folder, 'train',main_transform=train_main_transform, img_transform=img_transform, gt_transform=gt_transform)
     train_loader = DataLoader(train_set, batch_size=cfg_data.TRAIN_BATCH_SIZE, num_workers=8, collate_fn=SHHA_collate, shuffle=True, drop_last=True)
     
-    val_set = UCF50(cfg_data.DATA_PATH, val_folder, 'test', main_transform=None, img_transform=img_transform, gt_transform=gt_transform)
+    val_set = UCF50(cfg_data.DATA_PATH, map(int,str(val_folder)), 'test', main_transform=None, img_transform=img_transform, gt_transform=gt_transform)
     val_loader = DataLoader(val_set, batch_size=cfg_data.VAL_BATCH_SIZE, num_workers=8, shuffle=True, drop_last=False)
 
     return train_loader, val_loader, restore_transform
