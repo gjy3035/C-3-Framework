@@ -30,8 +30,9 @@ Due to linmited spare time and the number of GPUs, I do not plan to conduct some
 | VGG-16 (conv4_3)         |  36.6/88.9,  57.6/133.9,  91.4/222.0|119.3/207.7|71.4/115.7 |10.3/16.5|
 | VGG-16 (conv4_3)+decoder |  37.2/91.2,  56.9/138.3,  88.9/220.9|115.2/189.6|71.5/117.6 |10.5/17.4|
 | ResNet-50 (layer3)       |  32.4/76.1,  54.5/129.7,  78.3/201.6|    TBD    |    TBD    |7.7/12.6 |
+| ResNet-101 (layer3)      |                                     |    TBD    |    TBD    |   TBD   |
 | CSRNet                   |                                     |    TBD    |69.3/111.9 |10.6/16.6|
-| SANet                    |  42.4/85.4,  79.3/179.9,            |    TBD    |    TBD    |12.1/19.2|
+| SANet                    |  42.4/85.4,  79.3/179.9, 110.0/246.0|    TBD    |    TBD    |12.1/19.2|
 | CMTL                     |                  -                  |    TBD    |    TBD    |    -    |
 | SFCN                     |                                     |           |           |         |
 | SFCN $\dag$              |                                     |           |           |         |
@@ -43,6 +44,7 @@ Due to linmited spare time and the number of GPUs, I do not plan to conduct some
 | VGG-16 (conv4_3)         |TBD | TBD |
 | VGG-16 (conv4_3)+decoder |TBD | TBD |
 | ResNet-50 (layer3)       |TBD | TBD |
+| ResNet-101 (layer3)      |TBD | TBD |
 | CSRNet                   |TBD | TBD |
 | SANet                    |TBD | TBD |
 | CMTL                     |TBD | TBD |

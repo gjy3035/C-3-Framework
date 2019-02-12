@@ -42,7 +42,7 @@ elif data_mode is 'GCC':
 
 #------------Prepare Trainer------------
 net = cfg.NET
-if net in ['MCNN', 'VGG', 'VGG_DECODER', 'Res50', 'Res101', 'CSRNet']:
+if net in ['MCNN', 'VGG', 'VGG_DECODER', 'Res50', 'Res101', 'CSRNet','Res101_SFCN']:
     from trainer import Trainer
 elif net in ['SANet']: 
     from trainer_for_M2TCC import Trainer # double losses but signle output

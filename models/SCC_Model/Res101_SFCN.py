@@ -2,7 +2,7 @@ import torch.nn as nn
 import torch
 from torchvision import models
 
-from misc.layer import Conv2d, FC
+from misc.layer import convDU,convLR
 
 import torch.nn.functional as F
 from misc.utils import *
@@ -11,14 +11,22 @@ import pdb
 
 model_path = '../PyTorch_Pretrained/resnet101-5d3b4d8f.pth'
 
-class Res101(nn.Module):
+class Res101_SFCN(nn.Module):
     def __init__(self, ):
-        super(Res101, self).__init__()
+        super(Res101_SFCN, self).__init__()
+        self.seen = 0
+        self.backend_feat  = [512, 512, 512,256,128,64]
+        self.frontend = []
+        
+        self.backend = make_layers(self.backend_feat,in_channels = 1024,dilation = True)
+        self.convDU = convDU(in_out_channels=64,kernel_size=(1,9))
+        self.convLR = convLR(in_out_channels=64,kernel_size=(9,1))
 
-        self.de_pred = nn.Sequential(Conv2d(1024, 128, 1, same_padding=True, NL='relu'),
-                                     Conv2d(128, 1, 1, same_padding=True, NL='relu'))
 
-        # initialize_weights(self.modules())
+        self.output_layer = nn.Sequential(nn.Conv2d(64, 1, kernel_size=1),nn.ReLU())
+
+
+        initialize_weights(self.modules())
 
         res = models.resnet101()
         pre_wts = torch.load(model_path)
@@ -33,26 +41,37 @@ class Res101(nn.Module):
 
 
     def forward(self,x):
-
-        
         x = self.frontend(x)
 
         x = self.own_reslayer_3(x)
 
-        x = self.de_pred(x)
+        # pdb.set_trace()
+        x = self.backend(x)
+        x = self.convDU(x)
+        x = self.convLR(x)
+        x = self.output_layer(x)
 
         x = F.upsample(x,scale_factor=8)
         return x
-
-    def _initialize_weights(self):
-        for m in self.modules():
-            if isinstance(m, nn.Conv2d):
-                m.weight.data.normal_(0.0, std=0.01)
-                if m.bias is not None:
-                    m.bias.data.fill_(0)
-            elif isinstance(m, nn.BatchNorm2d):
-                m.weight.fill_(1)
-                m.bias.data.fill_(0)   
+            
+                
+def make_layers(cfg, in_channels = 3,batch_norm=False,dilation = False):
+    if dilation:
+        d_rate = 2
+    else:
+        d_rate = 1
+    layers = []
+    for v in cfg:
+        if v == 'M':
+            layers += [nn.MaxPool2d(kernel_size=2, stride=2)]
+        else:
+            conv2d = nn.Conv2d(in_channels, v, kernel_size=3, padding=d_rate,dilation = d_rate)
+            if batch_norm:
+                layers += [conv2d, nn.BatchNorm2d(v), nn.ReLU(inplace=True)]
+            else:
+                layers += [conv2d, nn.ReLU(inplace=True)]
+            in_channels = v
+    return nn.Sequential(*layers)      
 
 
 def make_res_layer(block, planes, blocks, stride=1):
