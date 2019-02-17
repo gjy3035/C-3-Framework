@@ -9,7 +9,7 @@ cfg = __C
 
 #------------------------------TRAIN------------------------
 __C.SEED = 3035 # random seed,  for reporduction
-__C.DATASET = 'QNRF' # dataset selection: GCC, SHHA, SHHB, UCF50, QNRF, WE
+__C.DATASET = 'WE' # dataset selection: GCC, SHHA, SHHB, UCF50, QNRF, WE
 
 if __C.DATASET == 'UCF50':# only for UCF50
 	from datasets.UCF50.setting import cfg_data
@@ -25,7 +25,7 @@ __C.NET = 'Res101_SFCN' # net selection: MCNN, VGG, VGG_DECODER, Res50, CSRNet, 
 __C.PRE_GCC = False # use the pretrained model on GCC dataset
 __C.PRE_GCC_MODEL = '' # path to model
 
-__C.GPU_ID = [0,1] # sigle gpu: [0], [1] ...; multi gpus: [0,1]
+__C.GPU_ID = [0] # sigle gpu: [0], [1] ...; multi gpus: [0,1]
 
 # learning rate settings
 __C.LR = 1e-5 # learning rate
@@ -59,7 +59,7 @@ __C.EXP_PATH = './exp' # the path of logs, checkpoints, and current codes
 
 
 #------------------------------VAL------------------------
-__C.VAL_DENSE_START = 50
+__C.VAL_DENSE_START = 30
 __C.VAL_FREQ = 10 # Before __C.VAL_DENSE_START epoches, the freq is set as __C.VAL_FREQ
 
 #------------------------------VIS------------------------
