@@ -112,14 +112,16 @@ class Trainer():
 
                 pred_map = pred_map.data.cpu().numpy()
                 gt_map = gt_map.data.cpu().numpy()
-                
-                pred_cnt = np.sum(pred_map)/self.cfg_data.LOG_PARA
-                gt_count = np.sum(gt_map)/self.cfg_data.LOG_PARA
 
+                for i_img in range(pred_map.shape[0]):
                 
-                losses.update(self.net.loss.item())
-                maes.update(abs(gt_count-pred_cnt))
-                mses.update((gt_count-pred_cnt)*(gt_count-pred_cnt))
+                    pred_cnt = np.sum(pred_map[i_img])/self.cfg_data.LOG_PARA
+                    gt_count = np.sum(gt_map[i_img])/self.cfg_data.LOG_PARA
+
+                    
+                    losses.update(self.net.loss.item())
+                    maes.update(abs(gt_count-pred_cnt))
+                    mses.update((gt_count-pred_cnt)*(gt_count-pred_cnt))
                 if vi==0:
                     vis_results(self.exp_name, self.epoch, self.writer, self.restore_transform, img, pred_map, gt_map)
             
