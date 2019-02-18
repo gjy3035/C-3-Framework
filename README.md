@@ -27,6 +27,7 @@ Due to linmited spare time and the number of GPUs, I do not plan to conduct some
 |          Method          |                GCC(rd,cc,cl)              | UCF-QNRF  |   SHT A   |  SHT B  |
 |--------------------------|-------------------------------------------|-----------|-----------|---------|
 | MCNN (RGB Image)         |102.2/238.3,     140.3/285.7,   176.1/373.9|243.5/364.7|110.6/171.1|23.9/42.7|
+| AlexNet (conv5)          |                       -                   |    TBD    |    TBD    |   TBD   |
 | VGG-16 (conv4_3)         |  36.6/88.9,      57.6/133.9,    91.4/222.0|119.3/207.7|71.4/115.7 |10.3/16.5|
 | VGG-16 (conv4_3)+decoder |  37.2/91.2,      56.9/138.3,    88.9/220.9|115.2/189.6|71.5/117.6 |10.5/17.4|
 | ResNet-50 (layer3)       |  32.4/76.1,  **54.5/129.7**,**78.3/201.6**|    TBD    |    TBD    |7.7/12.6 |
@@ -41,6 +42,7 @@ Due to linmited spare time and the number of GPUs, I do not plan to conduct some
 |          Method          | WE |UCF50|
 |--------------------------|----|-----|
 | MCNN (RGB Image)         |TBD | TBD |
+| AlexNet (conv5)          |TBD | TBD |
 | VGG-16 (conv4_3)         |TBD | TBD |
 | VGG-16 (conv4_3)+decoder |TBD | TBD |
 | ResNet-50 (layer3)       |TBD | TBD |
@@ -49,7 +51,7 @@ Due to linmited spare time and the number of GPUs, I do not plan to conduct some
 | SANet                    |TBD | TBD |
 | CMTL                     |TBD | TBD |
 | SFCN                     |    |     |
-| SFCN $\dag$              |    |     |
+| ResSFCN-101 (SFCN+)      |    |     |
 
 
 ### data processing code

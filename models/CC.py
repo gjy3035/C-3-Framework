@@ -6,8 +6,10 @@ import pdb
 class CrowdCounter(nn.Module):
     def __init__(self,gpus,model_name):
         super(CrowdCounter, self).__init__()        
-        
-        if model_name == 'VGG':
+
+        if model_name == 'AlexNet':
+            from SCC_Model.AlexNet import AlexNet as net        
+        elif model_name == 'VGG':
             from SCC_Model.VGG import VGG as net
         elif model_name == 'VGG_DECODER':
             from SCC_Model.VGG_decoder import VGG_decoder as net
