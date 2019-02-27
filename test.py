@@ -8,6 +8,7 @@ import misc.transforms as own_transforms
 import pandas as pd
 
 from models.CC import CrowdCounter
+from datasets.SHHA.setting import cfg_data
 from config import cfg
 from misc.utils import *
 import scipy.io as sio
@@ -20,7 +21,7 @@ exp_name = './DULR-display-save-mat'
 if not os.path.exists(exp_name):
     os.mkdir(exp_name)
 
-mean_std = cfg.DATA.MEAN_STD
+mean_std = cfg_data.MEAN_STD
 img_transform = standard_transforms.Compose([
         standard_transforms.ToTensor(),
         standard_transforms.Normalize(*mean_std)
@@ -40,8 +41,8 @@ def main():
     file_list = [filename for root,dirs,filename in os.walk(dataRoot+'/img/')]
     # pdb.set_trace()                     
 
-    ht_img = cfg.TRAIN.INPUT_SIZE[0]
-    wd_img = cfg.TRAIN.INPUT_SIZE[1]        
+    ht_img = cfg_data.TRAIN_SIZE[0]
+    wd_img = cfg_data.TRAIN_SIZE[1]        
                     
 
     test(file_list[0], model_path)
@@ -49,7 +50,7 @@ def main():
 
 def test(file_list, model_path):
 
-    net = CrowdCounter()
+    net = CrowdCounter(cfg.GPU_ID,cfg.NET)
     net.load_state_dict(torch.load(model_path))
     # net = tr_net.CNN()
     # net.load_state_dict(torch.load(model_path))
@@ -66,6 +67,7 @@ def test(file_list, model_path):
 
         den = pd.read_csv(denname, sep=',',header=None).values
         den = den.astype(np.float32, copy=False)
+        den = Image.fromarray(den)
 
         img = Image.open(imgname)
 
@@ -76,17 +78,17 @@ def test(file_list, model_path):
         wd_1, ht_1 = img.size
         # pdb.set_trace()
 
-        if wd_1 < cfg.DATA.STD_SIZE[1]:
-            dif = cfg.DATA.STD_SIZE[1] - wd_1
+        if wd_1 < cfg_data.DATA.STD_SIZE[1]:
+            dif = cfg_data.DATA.STD_SIZE[1] - wd_1
             img = ImageOps.expand(img, border=(0,0,dif,0), fill=0)
             pad = np.zeros([ht_1,dif])
             den = np.array(den)
             den = np.hstack((den,pad))
             
-        if ht_1 < cfg.DATA.STD_SIZE[0]:
-            dif = cfg.DATA.STD_SIZE[0] - ht_1
+        if ht_1 < cfg_data.DATA.STD_SIZE[0]:
+            dif = cfg_data.DATA.STD_SIZE[0] - ht_1
             img = ImageOps.expand(img, border=(0,0,0,dif), fill=0)
-            pad = np.zeros([dif,wd_1])
+            pad = np.zeros([dif,cfg_data.DATA.STD_SIZE[1]])
             den = np.array(den)
             den = np.vstack((den,pad))
 
@@ -104,7 +106,7 @@ def test(file_list, model_path):
         pred_map = pred_map/np.max(pred_map+1e-20)
         pred_map = pred_map[0:ht_1,0:wd_1]
         
-        
+        den = np.array(den) #for no pad images
         den = den/np.max(den+1e-20)
         den = den[0:ht_1,0:wd_1]
 
