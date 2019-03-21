@@ -6,6 +6,8 @@ An open-source PyTorch code for crowd counting
 
 This repo is under development. We will spare my spare time to develop it. 
 
+If you have any question/suggestion/bug, please you submit the issue instead of email or other ways. 
+
 We expect to complete the initial development in March, 2019. 
 
 **Tips: Before March, 2019, we will not address and accept any issues and pull requests from outside the team.**
@@ -16,9 +18,9 @@ The purpose of this code is an efficient, flexible framework for supervised crow
 
 
 ## Features
-- **Convenient development kit**. It support the convenient dev kit on the six maintream datasets.
-- **Solid baselines**. It provides some baselines of classic pre-trained models, such as VGG, ResNet, DenseNet and so on. Base on it, you can compare your proposed models' effects.
-- **Powerful log**. It does not only record the loss, visulization in Tensorboard, but also save the current code package (including parameters settings). The saved code package can be directly ran to reproduce the experiments at any time. You won't be bothered by forgetting the parameters.
+- **Convenient development kit**. It is a convenient dev kit on the six maintream datasets.
+- **Solid baselines**. It provides some baselines of some classic pre-trained models, such as AlexNet, VGG, ResNet and so on. Base on it, you can easily compare your proposed models' effects with them.
+- **Powerful log**. It does not only record the loss, visulization in Tensorboard, but also save the current code package (including parameters settings). The saved code package can be directly ran to reproduce the experiments at any time. You won't be bothered by forgetting the confused parameters.
 
 
 ## Performance
@@ -68,7 +70,7 @@ Due to linmited spare time and the number of GPUs, I do not plan to conduct some
 ### Preparation
 - Prerequisites
   - Python 2.7
-  - Pytorch 1.0 (some networks only suport 0.4): http://pytorch.org .
+  - Pytorch 1.0 (some networks only support 0.4): http://pytorch.org .
   - other libs in ```requirements.txt```, run ```pip install -r requirements.txt```.
 
 
@@ -100,4 +102,33 @@ Due to linmited spare time and the number of GPUs, I do not plan to conduct some
     |   +-- resnet50-19c8e357.pth
     |   +-- ......
     ```
+    
 
+### Training
+
+- set the parameters in ```config.py``` and ```./datasets/XXX/setting.py```.
+- run ```python train.py```.
+- run ```tensorboard --logdir=exp --port=6006```.
+
+### Testing
+
+We only provide an examplar to test the model on the test set. Yopu may need to modify it to test your models.
+
+### Citation
+If you find this project useful for your research, please cite:
+```
+@inproceedings{wang2019learning,
+  title={Learning from Synthetic Data for Crowd Counting in the Wild},
+  author={Wang, Qi and Gao, Junyu and Lin, Wei and Yuan, Yuan},
+  booktitle={Proceedings of IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year={2019}
+}
+```
+```
+@misc{gao2019c3framework,
+author = {Gao, Junyu and Gao, Chenyu and Zeng, Xin and Qin, Zequn and Wen, Jun},
+title = {C^3-Framework: An open-source PyTorch code for crowd counting},
+year = {2019},
+howpublished = {\url{https://github.com/gjy3035/C-3-Framework}}
+}
+```

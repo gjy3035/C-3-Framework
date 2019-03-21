@@ -9,7 +9,7 @@ __C_GCC.STD_SIZE = (544,960)
 __C_GCC.TRAIN_SIZE = (480,848)
 __C_GCC.DATA_PATH = '../ProcessedData/GCC'
 
-__C_GCC.VAL_MODE = 'rd' # rd: radomn splitting; cc: cross camera; cl: cross location
+__C_GCC.VAL_MODE = 'cc' # rd: radomn splitting; cc: cross camera; cl: cross location
 
 __C_GCC.DATA_GT = 'k15_s4'            
 
@@ -19,8 +19,8 @@ __C_GCC.LABEL_FACTOR = 1
 __C_GCC.LOG_PARA = 100.
 
 __C_GCC.RESUME_MODEL = ''#model path
-__C_GCC.TRAIN_BATCH_SIZE = 16 #imgs
+__C_GCC.TRAIN_BATCH_SIZE = 4 #imgs
 
-__C_GCC.VAL_BATCH_SIZE = 16 #
+__C_GCC.VAL_BATCH_SIZE = 4 #
 
 

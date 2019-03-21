@@ -127,14 +127,15 @@ class Trainer():
                 pred_map = pred_map.data.cpu().numpy()
                 gt_map = gt_map.data.cpu().numpy()
                 
-                pred_cnt = np.sum(pred_map)/self.cfg_data.LOG_PARA
-                gt_count = np.sum(gt_map)/self.cfg_data.LOG_PARA
+                for i_img in range(pred_map.shape[0]):
+                    pred_cnt = np.sum(pred_map[i_img])/self.cfg_data.LOG_PARA
+                    gt_count = np.sum(gt_map[i_img])/self.cfg_data.LOG_PARA
 
-                loss1,loss2 = self.net.loss
-                loss = loss1.item()+loss2.item()
-                losses.update(loss)
-                maes.update(abs(gt_count-pred_cnt))
-                mses.update((gt_count-pred_cnt)*(gt_count-pred_cnt))
+                    loss1,loss2 = self.net.loss
+                    loss = loss1.item()+loss2.item()
+                    losses.update(loss)
+                    maes.update(abs(gt_count-pred_cnt))
+                    mses.update((gt_count-pred_cnt)*(gt_count-pred_cnt))
                 if vi==0:
                     vis_results(self.exp_name, self.epoch, self.writer, self.restore_transform, img, pred_map, gt_map)
             
@@ -172,11 +173,13 @@ class Trainer():
                     pred_map = pred_map.data.cpu().numpy()
                     gt_map = gt_map.data.cpu().numpy()
                     
-                    pred_cnt = np.sum(pred_map)/self.cfg_data.LOG_PARA
-                    gt_count = np.sum(gt_map)/self.cfg_data.LOG_PARA
+                    
+                    for i_img in range(pred_map.shape[0]):
+                        pred_cnt = np.sum(pred_map[i_img])/self.cfg_data.LOG_PARA
+                        gt_count = np.sum(gt_map[i_img])/self.cfg_data.LOG_PARA
 
-                    losses.update(self.net.loss.item(),i_sub)
-                    maes.update(abs(gt_count-pred_cnt),i_sub)
+                        losses.update(self.net.loss.item(),i_sub)
+                        maes.update(abs(gt_count-pred_cnt),i_sub)
                     if vi==0:
                         vis_results(self.exp_name, self.epoch, self.writer, self.restore_transform, img, pred_map, gt_map)
             
@@ -215,24 +218,25 @@ class Trainer():
                 pred_map = pred_map.data.cpu().numpy()
                 gt_map = gt_map.data.cpu().numpy()
                 
-                pred_cnt = np.sum(pred_map)/self.cfg_data.LOG_PARA
-                gt_count = np.sum(gt_map)/self.cfg_data.LOG_PARA
+                for i_img in range(pred_map.shape[0]):
+                    pred_cnt = np.sum(pred_map)/self.cfg_data.LOG_PARA
+                    gt_count = np.sum(gt_map)/self.cfg_data.LOG_PARA
 
-                s_mae = abs(gt_count-pred_cnt)
-                s_mse = (gt_count-pred_cnt)*(gt_count-pred_cnt)
+                    s_mae = abs(gt_count-pred_cnt)
+                    s_mse = (gt_count-pred_cnt)*(gt_count-pred_cnt)
 
-                loss1,loss2 = self.net.loss
-                loss = loss1.item()+loss2.item()
-                losses.update(loss)
-                maes.update(s_mae)
-                mses.update(s_mse)   
-                attributes_pt = attributes_pt.squeeze() 
-                c_maes['level'].update(s_mae,attributes_pt[0])
-                c_mses['level'].update(s_mse,attributes_pt[0])
-                c_maes['time'].update(s_mae,attributes_pt[1]/3)
-                c_mses['time'].update(s_mse,attributes_pt[1]/3)
-                c_maes['weather'].update(s_mae,attributes_pt[2])
-                c_mses['weather'].update(s_mse,attributes_pt[2])
+                    loss1,loss2 = self.net.loss
+                    loss = loss1.item()+loss2.item()
+                    losses.update(loss)
+                    maes.update(s_mae)
+                    mses.update(s_mse)   
+                    attributes_pt = attributes_pt.squeeze() 
+                    c_maes['level'].update(s_mae,attributes_pt[0])
+                    c_mses['level'].update(s_mse,attributes_pt[0])
+                    c_maes['time'].update(s_mae,attributes_pt[1]/3)
+                    c_mses['time'].update(s_mse,attributes_pt[1]/3)
+                    c_maes['weather'].update(s_mae,attributes_pt[2])
+                    c_mses['weather'].update(s_mse,attributes_pt[2])
 
 
                 if vi==0:

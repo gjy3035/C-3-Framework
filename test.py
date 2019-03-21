@@ -1,4 +1,6 @@
 from matplotlib import pyplot as plt
+
+import matplotlib
 import os
 import random
 import torch
@@ -7,8 +9,7 @@ import torchvision.transforms as standard_transforms
 import misc.transforms as own_transforms
 import pandas as pd
 
-from models.CC import CrowdCounter
-from datasets.SHHA.setting import cfg_data
+from models.UCC import UCC
 from config import cfg
 from misc.utils import *
 import scipy.io as sio
@@ -17,11 +18,17 @@ from PIL import Image, ImageOps
 torch.cuda.set_device(0)
 torch.backends.cudnn.benchmark = True
 
-exp_name = './DULR-display-save-mat'
+exp_name = '../SHHB_results'
 if not os.path.exists(exp_name):
     os.mkdir(exp_name)
 
-mean_std = cfg_data.MEAN_STD
+if not os.path.exists(exp_name+'/pred'):
+    os.mkdir(exp_name+'/pred')
+
+if not os.path.exists(exp_name+'/gt'):
+    os.mkdir(exp_name+'/gt')
+
+mean_std = ([0.452016860247, 0.447249650955, 0.431981861591],[0.23242045939, 0.224925786257, 0.221840232611])
 img_transform = standard_transforms.Compose([
         standard_transforms.ToTensor(),
         standard_transforms.Normalize(*mean_std)
@@ -32,18 +39,13 @@ restore = standard_transforms.Compose([
     ])
 pil_to_tensor = standard_transforms.ToTensor()
 
-dataRoot = '/media/D/DataSet/CC/576x768RGB/shanghaitech_part_A/test_data'
+dataRoot = 'xxx/shanghaitech_part_B/test'
 
-model_path = '/media/D/CC_v2/CC-FCN/exp/06-29_22-39_vgg_big_relu_4__0.0001_0.995_1_-1/all_ep_178_mae_74.1_mse_131.0.pth'
+model_path = 'xxx.pth'
 
 def main():
-    # file_list = [filename for filename in os.listdir(dataRoot+'/img/') if os.path.isfile(os.path.join(dataRoot+'/img/',filename))]
-    file_list = [filename for root,dirs,filename in os.walk(dataRoot+'/img/')]
-    # pdb.set_trace()                     
-
-    ht_img = cfg_data.TRAIN_SIZE[0]
-    wd_img = cfg_data.TRAIN_SIZE[1]        
-                    
+    
+    file_list = [filename for root,dirs,filename in os.walk(dataRoot+'/img/')]                                           
 
     test(file_list[0], model_path)
    
@@ -52,10 +54,14 @@ def test(file_list, model_path):
 
     net = CrowdCounter(cfg.GPU_ID,cfg.NET)
     net.load_state_dict(torch.load(model_path))
-    # net = tr_net.CNN()
-    # net.load_state_dict(torch.load(model_path))
     net.cuda()
     net.eval()
+
+
+    f1 = plt.figure(1)
+
+    gts = []
+    preds = []
 
     for filename in file_list:
     	print filename
@@ -64,54 +70,36 @@ def test(file_list, model_path):
 
         denname = dataRoot + '/den/' + filename_no_ext + '.csv'
 
-
         den = pd.read_csv(denname, sep=',',header=None).values
         den = den.astype(np.float32, copy=False)
-        den = Image.fromarray(den)
 
         img = Image.open(imgname)
 
         if img.mode == 'L':
             img = img.convert('RGB')
 
-        # prepare
-        wd_1, ht_1 = img.size
-        # pdb.set_trace()
-
-        if wd_1 < cfg_data.DATA.STD_SIZE[1]:
-            dif = cfg_data.DATA.STD_SIZE[1] - wd_1
-            img = ImageOps.expand(img, border=(0,0,dif,0), fill=0)
-            pad = np.zeros([ht_1,dif])
-            den = np.array(den)
-            den = np.hstack((den,pad))
-            
-        if ht_1 < cfg_data.DATA.STD_SIZE[0]:
-            dif = cfg_data.DATA.STD_SIZE[0] - ht_1
-            img = ImageOps.expand(img, border=(0,0,0,dif), fill=0)
-            pad = np.zeros([dif,cfg_data.DATA.STD_SIZE[1]])
-            den = np.array(den)
-            den = np.vstack((den,pad))
 
         img = img_transform(img)
 
         gt = np.sum(den)
+        with torch.no_grad():
+            img = Variable(img[None,:,:,:]).cuda()
+            pred_map = net.test_forward(img)
 
-        img = Variable(img[None,:,:,:],volatile=True).cuda()
-
-        #forward
-        pred_map = net.test_forward(img)
+        sio.savemat(exp_name+'/pred/'+filename_no_ext+'.mat',{'data':pred_map.squeeze().cpu().numpy()/100.})
+        sio.savemat(exp_name+'/gt/'+filename_no_ext+'.mat',{'data':den})
 
         pred_map = pred_map.cpu().data.numpy()[0,0,:,:]
+
+
         pred = np.sum(pred_map)/100.0
         pred_map = pred_map/np.max(pred_map+1e-20)
-        pred_map = pred_map[0:ht_1,0:wd_1]
         
-        den = np.array(den) #for no pad images
         den = den/np.max(den+1e-20)
-        den = den[0:ht_1,0:wd_1]
 
+        
         den_frame = plt.gca()
-        plt.imshow(den)
+        plt.imshow(den, 'jet')
         den_frame.axes.get_yaxis().set_visible(False)
         den_frame.axes.get_xaxis().set_visible(False)
         den_frame.spines['top'].set_visible(False) 
@@ -126,7 +114,7 @@ def test(file_list, model_path):
         # sio.savemat(exp_name+'/'+filename_no_ext+'_gt_'+str(int(gt))+'.mat',{'data':den})
 
         pred_frame = plt.gca()
-        plt.imshow(pred_map)
+        plt.imshow(pred_map, 'jet')
         pred_frame.axes.get_yaxis().set_visible(False)
         pred_frame.axes.get_xaxis().set_visible(False)
         pred_frame.spines['top'].set_visible(False) 
@@ -143,7 +131,7 @@ def test(file_list, model_path):
         diff = den-pred_map
 
         diff_frame = plt.gca()
-        plt.imshow(diff)
+        plt.imshow(diff, 'jet')
         plt.colorbar()
         diff_frame.axes.get_yaxis().set_visible(False)
         diff_frame.axes.get_xaxis().set_visible(False)
@@ -157,19 +145,7 @@ def test(file_list, model_path):
         plt.close()
 
         # sio.savemat(exp_name+'/'+filename_no_ext+'_diff.mat',{'data':diff})
-
-
-def get_pts(data):
-    pts = []
-    cols,rows = data.shape
-    data = data*100
-
-    for i in range(0,rows):  
-        for j in range(0,cols):  
-            loc = [i,j]
-            for i_pt in range(0,int(data[i][j])):
-                pts.append(loc) 
-    return pts               
+                     
 
 
 

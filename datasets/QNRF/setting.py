@@ -17,6 +17,6 @@ __C_QNRF.LOG_PARA = 100.
 __C_QNRF.RESUME_MODEL = ''#model path
 __C_QNRF.TRAIN_BATCH_SIZE = 1 #imgs
 
-__C_QNRF.VAL_BATCH_SIZE = 1 #
+__C_QNRF.VAL_BATCH_SIZE = 1 # must be 1
 
 
