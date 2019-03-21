@@ -8,9 +8,6 @@ This repo is under development. We will spare my spare time to develop it.
 
 If you have any question/suggestion/bug, please you submit the issue instead of email or other ways. 
 
-We expect to complete the initial development in March, 2019. 
-
-**Tips: Before March, 2019, we will not address and accept any issues and pull requests from outside the team.**
 
 ## Goal
 
