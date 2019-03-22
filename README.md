@@ -4,9 +4,9 @@ An open-source PyTorch code for crowd counting
 
 ---
 
-This repo is under development. We will spare my spare time to develop it. 
+This repo is under development. We will spare our spare time to develop it. 
 
-If you have any question/suggestion/bug, please you submit the issue instead of email or other ways. 
+If you have any question/suggestion and find bugs, please you submit the issue/PR instead of email or other ways. 
 
 
 ## Goal
@@ -109,10 +109,10 @@ Due to linmited spare time and the number of GPUs, I do not plan to conduct some
 
 ### Testing
 
-We only provide an examplar to test the model on the test set. Yopu may need to modify it to test your models.
+We only provide an examplar to test the model on the test set. You may need to modify it to test your models.
 
 ### Citation
-If you find this project useful for your research, please cite:
+If you find this project is useful for your research, please cite:
 ```
 @inproceedings{wang2019learning,
   title={Learning from Synthetic Data for Crowd Counting in the Wild},
