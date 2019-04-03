@@ -103,7 +103,7 @@ Due to linmited spare time and the number of GPUs, I do not plan to conduct some
 
 ### Training
 
-- set the parameters in ```config.py``` and ```./datasets/XXX/setting.py```.
+- set the parameters in ```config.py``` and ```./datasets/XXX/setting.py``` (if you want to reproduce our results, you are recommonded to use our parameters in ```./results_reports```).
 - run ```python train.py```.
 - run ```tensorboard --logdir=exp --port=6006```.
 
@@ -111,7 +111,12 @@ Due to linmited spare time and the number of GPUs, I do not plan to conduct some
 
 We only provide an examplar to test the model on the test set. You may need to modify it to test your models.
 
-### Citation
+
+### Pretrained Models on GCC
+
+Considering the large-scale GCC, we provide the pretrained models on GCC using random splitting to save the researcher's training time. You can download them from this [link](https://mailnwpueducn-my.sharepoint.com/:f:/g/personal/gjy3035_mail_nwpu_edu_cn/EvH1YcdFBbRJoc7G_Vqv0DwBGmuyXPlH899OrQ54-cybWQ?e=t93edQ). Unfortunately, we lose the MCNN model trained on GCC, and we will re-train and realease it ASAP.
+
+## Citation
 If you find this project is useful for your research, please cite:
 ```
 @inproceedings{wang2019learning,

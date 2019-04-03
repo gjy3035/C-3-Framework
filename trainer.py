@@ -35,7 +35,7 @@ class Trainer():
         self.i_tb = 0
         self.epoch = -1
 
-        if cfg.PRE_GCC:
+        if cfg.PRE_GCC !='':
             self.net.load_state_dict(torch.load(cfg.PRE_GCC_MODEL))
 
         self.train_loader, self.val_loader, self.restore_transform = dataloader()
