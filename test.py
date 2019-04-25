@@ -9,7 +9,7 @@ import torchvision.transforms as standard_transforms
 import misc.transforms as own_transforms
 import pandas as pd
 
-from models.UCC import UCC
+from models.CC import CrowdCounter
 from config import cfg
 from misc.utils import *
 import scipy.io as sio
@@ -39,7 +39,7 @@ restore = standard_transforms.Compose([
     ])
 pil_to_tensor = standard_transforms.ToTensor()
 
-dataRoot = 'xxx/shanghaitech_part_B/test'
+dataRoot = '../ProcessedData/shanghaitech_part_B/test'
 
 model_path = 'xxx.pth'
 

@@ -9,7 +9,7 @@ from misc.utils import *
 
 import pdb
 
-model_path = '../PyTorch_Pretrained/resnet50-19c8e357.pth'
+# model_path = '../PyTorch_Pretrained/resnet50-19c8e357.pth'
 
 class Res50(nn.Module):
     def __init__(self, ):
@@ -20,9 +20,9 @@ class Res50(nn.Module):
 
         initialize_weights(self.modules())
 
-        res = models.resnet50()
-        pre_wts = torch.load(model_path)
-        res.load_state_dict(pre_wts)
+        res = models.resnet50(pretrained=pretrained)
+        # pre_wts = torch.load(model_path)
+        # res.load_state_dict(pre_wts)
         self.frontend = nn.Sequential(
             res.conv1, res.bn1, res.relu, res.maxpool, res.layer1, res.layer2
         )

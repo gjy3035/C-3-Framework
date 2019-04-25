@@ -6,14 +6,14 @@ from misc.layer import Conv2d, FC
 from torchvision import models
 from misc.utils import *
 
-model_path = '../PyTorch_Pretrained/vgg16-397923af.pth'
+# model_path = '../PyTorch_Pretrained/vgg16-397923af.pth'
 
 class VGG(nn.Module):
     def __init__(self, pretrained=True):
         super(VGG, self).__init__()
-        vgg = models.vgg16()
-        if pretrained:
-            vgg.load_state_dict(torch.load(model_path))
+        vgg = models.vgg16(pretrained=pretrained)
+        # if pretrained:
+        #     vgg.load_state_dict(torch.load(model_path))
         features = list(vgg.features.children())
         self.features4 = nn.Sequential(*features[0:23])
 

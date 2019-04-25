@@ -6,14 +6,14 @@ from misc.layer import Conv2d, FC
 from torchvision import models
 from misc.utils import *
 
-model_path = '../PyTorch_Pretrained/alexnet-owt-4df8aa71.pth'
+# model_path = '../PyTorch_Pretrained/alexnet-owt-4df8aa71.pth'
 
 class AlexNet(nn.Module):
     def __init__(self, pretrained=True):
         super(AlexNet, self).__init__()
-        alex = models.alexnet()
-        if pretrained:
-            alex.load_state_dict(torch.load(model_path))
+        alex = models.alexnet(pretrained=pretrained)
+        # if pretrained:
+        #     alex.load_state_dict(torch.load(model_path))
         features = list(alex.features.children())
         
         self.layer1 = nn.Conv2d(3, 64, kernel_size=11, stride=4, padding=4) # original padding is 4

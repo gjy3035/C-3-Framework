@@ -20,9 +20,9 @@ class Res101(nn.Module):
 
         # initialize_weights(self.modules())
 
-        res = models.resnet101()
-        pre_wts = torch.load(model_path)
-        res.load_state_dict(pre_wts)
+        res = models.resnet101(pretrained=pretrained)
+        # pre_wts = torch.load(model_path)
+        # res.load_state_dict(pre_wts)
         self.frontend = nn.Sequential(
             res.conv1, res.bn1, res.relu, res.maxpool, res.layer1, res.layer2
         )
