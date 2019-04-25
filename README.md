@@ -6,7 +6,7 @@ An open-source PyTorch code for crowd counting
 
 This repo is under development. We will spare our spare time to develop it. 
 
-If you have any question/suggestion and find bugs, please you submit the issue/PR instead of email or other ways. 
+If you have any question/suggestion or find any bugs, please submit the issue/PR instead of email or other ways. 
 
 
 ## Goal
@@ -17,11 +17,11 @@ The purpose of this code is an efficient, flexible framework for supervised crow
 ## Features
 - **Convenient development kit**. It is a convenient dev kit on the six maintream datasets.
 - **Solid baselines**. It provides some baselines of some classic pre-trained models, such as AlexNet, VGG, ResNet and so on. Base on it, you can easily compare your proposed models' effects with them.
-- **Powerful log**. It does not only record the loss, visulization in Tensorboard, but also save the current code package (including parameters settings). The saved code package can be directly ran to reproduce the experiments at any time. You won't be bothered by forgetting the confused parameters.
+- **Powerful log**. It does not only record the loss, visualization in Tensorboard, but also save the current code package (including parameters settings). The saved code package can be directly ran to reproduce the experiments at any time. You won't be bothered by forgetting the confused parameters.
 
 
 ## Performance
-Due to linmited spare time and the number of GPUs, I do not plan to conduct some experiments (named as "TBD"). If you are intested in the project, you are welcome to submit your own experimental parameters and results.
+Due to limited spare time and the number of GPUs, I do not plan to conduct some experiments (named as "TBD"). If you are interested in the project, you are welcomed to submit your own experimental parameters and results.
 
 |          Method          |                GCC(rd,cc,cl)              | UCF-QNRF  |   SHT A   |  SHT B  |
 |--------------------------|-------------------------------------------|-----------|-----------|---------|
@@ -83,7 +83,7 @@ Due to linmited spare time and the number of GPUs, I do not plan to conduct some
 
 - Pretrained Model
   - Some Counting Networks (such as VGG, CSRNet and so on) adopt the pre-trained models on ImageNet. You can download them from [TorchVision](https://github.com/pytorch/vision/tree/master/torchvision/models)
-  - Place the processed data to ```../PyTorch_Pretrained```.
+  - Place the processed model to ```../PyTorch_Pretrained```.
 
 - Folder Tree
 
@@ -109,12 +109,12 @@ Due to linmited spare time and the number of GPUs, I do not plan to conduct some
 
 ### Testing
 
-We only provide an examplar to test the model on the test set. You may need to modify it to test your models.
+We only provide an example to test the model on the test set. You may need to modify it to test your own models.
 
 
 ### Pretrained Models on GCC
 
-Considering the large-scale GCC, we provide the pretrained models on GCC using random splitting to save the researcher's training time. You can download them from this [link](https://mailnwpueducn-my.sharepoint.com/:f:/g/personal/gjy3035_mail_nwpu_edu_cn/EvH1YcdFBbRJoc7G_Vqv0DwBGmuyXPlH899OrQ54-cybWQ?e=t93edQ). Unfortunately, we lose the MCNN model trained on GCC, and we will re-train and realease it ASAP.
+Considering the large-scale GCC, we provide the pretrained models on GCC using random splitting to save the researcher's training time. You can download them from this [link](https://mailnwpueducn-my.sharepoint.com/:f:/g/personal/gjy3035_mail_nwpu_edu_cn/EvH1YcdFBbRJoc7G_Vqv0DwBGmuyXPlH899OrQ54-cybWQ?e=t93edQ). Unfortunately, we've lost the MCNN model trained on GCC, and we will re-train and realease it ASAP.
 
 ## Citation
 If you find this project is useful for your research, please cite:
