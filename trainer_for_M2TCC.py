@@ -35,22 +35,34 @@ class Trainer():
 
         self.train_record = {'best_mae': 1e20, 'best_mse':1e20, 'best_model_name': ''}
         self.timer = {'iter time' : Timer(),'train time' : Timer(),'val time' : Timer()} 
-        self.writer, self.log_txt = logger(self.exp_path, self.exp_name, self.pwd, 'exp')
 
 
+        self.epoch = 0
         self.i_tb = 0
-        self.epoch = -1
-
+        
         if cfg.PRE_GCC:
-            net.load_state_dict(torch.load(cfg.PRE_GCC_MODEL))
+            self.net.load_state_dict(torch.load(cfg.PRE_GCC_MODEL))
 
         self.train_loader, self.val_loader, self.restore_transform = dataloader()
+
+        if cfg.RESUME:
+            latest_state = torch.load(cfg.RESUME_PATH)
+            self.net.load_state_dict(latest_state['net'])
+            self.optimizer.load_state_dict(latest_state['optimizer'])
+            self.scheduler.load_state_dict(latest_state['scheduler'])
+            self.epoch = latest_state['epoch'] + 1
+            self.i_tb = latest_state['i_tb']
+            self.train_record = latest_state['train_record']
+            self.exp_path = latest_state['exp_path']
+            self.exp_name = latest_state['exp_name']
+
+        self.writer, self.log_txt = logger(self.exp_path, self.exp_name, self.pwd, 'exp', resume=cfg.RESUME)
 
 
     def forward(self):
 
         # self.validate_V3()
-        for epoch in range(cfg.MAX_EPOCH):
+        for epoch in range(self.epoch, cfg.MAX_EPOCH):
             self.epoch = epoch
             if epoch > cfg.LR_DECAY_START:
                 self.scheduler.step()
@@ -147,7 +159,8 @@ class Trainer():
         self.writer.add_scalar('mae', mae, self.epoch + 1)
         self.writer.add_scalar('mse', mse, self.epoch + 1)
 
-        self.train_record = update_model(self.net,self.epoch,self.exp_path,self.exp_name,[mae, mse, loss],self.train_record,self.log_txt)
+        self.train_record = update_model(self.net,self.optimizer,self.scheduler,self.epoch,self.i_tb,self.exp_path,self.exp_name, \
+            [mae, mse, loss],self.train_record,self.log_txt)
         print_summary(self.exp_name,[mae, mse, loss],self.train_record)
 
 
@@ -189,7 +202,8 @@ class Trainer():
         self.writer.add_scalar('val_loss', loss, self.epoch + 1)
         self.writer.add_scalar('mae', mae, self.epoch + 1)
 
-        self.train_record = update_model(self.net,self.epoch,self.exp_path,self.exp_name,[mae, 0, loss],self.train_record,self.log_txt)
+        self.train_record = update_model(self.net,self.optimizer,self.scheduler,self.epoch,self.i_tb,self.exp_path,self.exp_name, \
+            [mae, mse, loss],self.train_record,self.log_txt)
         print_summary(self.exp_name,[mae, 0, loss],self.train_record)
 
 
@@ -251,6 +265,7 @@ class Trainer():
         self.writer.add_scalar('mae', mae, self.epoch + 1)
         self.writer.add_scalar('mse', mse, self.epoch + 1)
 
-        self.train_record = update_model(self.net,self.epoch,self.exp_path,self.exp_name,[mae, mse, loss],self.train_record)
+        self.train_record = update_model(self.net,self.optimizer,self.scheduler,self.epoch,self.i_tb,self.exp_path,self.exp_name, \
+            [mae, mse, loss],self.train_record,self.log_txt)
 
         print_GCC_summary(self.log_txt,self.epoch,[mae, mse, loss],self.train_record,c_maes,c_mses)

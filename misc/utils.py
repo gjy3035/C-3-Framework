@@ -57,7 +57,7 @@ def weights_normal_init(*models):
                     m.weight.data.normal_(0.0, dev)
 
 
-def logger(exp_path, exp_name, work_dir, exception):
+def logger(exp_path, exp_name, work_dir, exception, resume=False):
 
     from tensorboardX import SummaryWriter
     
@@ -72,8 +72,8 @@ def logger(exp_path, exp_name, work_dir, exception):
     with open(log_file, 'a') as f:
         f.write(''.join(cfg_lines) + '\n\n\n\n')
 
-
-    copy_cur_env(work_dir, exp_path+ '/' + exp_name + '/code', exception)
+    if not resume:
+        copy_cur_env(work_dir, exp_path+ '/' + exp_name + '/code', exception)
 
 
     return writer, log_file
@@ -205,7 +205,7 @@ def print_GCC_summary(log_txt,epoch, scores,train_record,c_maes,c_mses):
     print '='*50    
 
 
-def update_model(net,epoch,exp_path,exp_name,scores,train_record,log_file=None):
+def update_model(net,optimizer,scheduler,epoch,i_tb,exp_path,exp_name,scores,train_record,log_file=None):
 
     mae, mse, loss = scores
 
@@ -223,6 +223,12 @@ def update_model(net,epoch,exp_path,exp_name,scores,train_record,log_file=None):
     if mse < train_record['best_mse']:
         train_record['best_mse'] = mse 
 
+    latest_state = {'train_record':train_record, 'net':net.state_dict(), 'optimizer':optimizer.state_dict(),\
+                    'scheduler':scheduler.state_dict(), 'epoch': epoch, 'i_tb':i_tb, 'exp_path':exp_path, \
+                    'exp_name':exp_name}
+
+    torch.save(latest_state,os.path.join(exp_path, exp_name, 'latest_state.pth'))
+
     return train_record
 
 
@@ -235,6 +241,7 @@ def copy_cur_env(work_dir, dst_dir, exception):
 
         file = os.path.join(work_dir,filename)
         dst_file = os.path.join(dst_dir,filename)
+
 
         if os.path.isdir(file) and exception not in filename:
             shutil.copytree(file, dst_file)

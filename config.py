@@ -20,10 +20,13 @@ if __C.DATASET == 'GCC':# only for GCC
 	__C.VAL_MODE = cfg_data.VAL_MODE 
 
 
-__C.NET = 'CSRNet' # net selection: MCNN, AlexNet, VGG, VGG_DECODER, Res50, CSRNet, SANet
+__C.NET = 'SANet' # net selection: MCNN, AlexNet, VGG, VGG_DECODER, Res50, CSRNet, SANet
 
 __C.PRE_GCC = False # use the pretrained model on GCC dataset
-__C.PRE_GCC_MODEL = './backup_exp/01-25_23-01_GCC_CSRNet_1e-05_rd/all_ep_39_mae_32.6_mse_74.3.pth' # path to model
+__C.PRE_GCC_MODEL = 'path to model' # path to model
+
+__C.RESUME = False # contine training
+__C.RESUME_PATH = './exp/04-25_09-19_SHHB_VGG_1e-05/latest_state.pth' # 
 
 __C.GPU_ID = [0,1] # sigle gpu: [0], [1] ...; multi gpus: [0,1]
 
