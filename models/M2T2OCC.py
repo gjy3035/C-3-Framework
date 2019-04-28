@@ -29,7 +29,9 @@ class CrowdCounter(nn.Module):
     def forward(self, img, gt_map=None, gt_cls_label=None):
         density_map, density_cls_score = self.CCN(img)
 
-        density_cls_prob = F.softmax(density_cls_score)
+        # pdb.set_trace()
+
+        density_cls_prob = F.softmax(density_cls_score,dim=1)
 
         self.loss_mse, self.cross_entropy = self.build_loss(density_map.squeeze(), gt_map.squeeze(), density_cls_prob, gt_cls_label)
         return density_map

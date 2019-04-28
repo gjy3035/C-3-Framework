@@ -7,6 +7,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from misc.layer import Conv2d, FC
 from misc.utils import weights_normal_init
+from misc.utils import *
 
 
 class CMTL(nn.Module):
@@ -51,8 +52,9 @@ class CMTL(nn.Module):
                                         nn.PReLU(),
                                         Conv2d(8, 1, 1, same_padding=True, NL='relu', bn=bn))
 
-        weights_normal_init(self.base_layer, self.hl_prior_1, self.hl_prior_2, self.hl_prior_fc1, self.hl_prior_fc2, \
-                            self.hl_prior_fc3, self.de_stage_1, self.de_stage_2)
+        # weights_normal_init(self.base_layer, self.hl_prior_1, self.hl_prior_2, self.hl_prior_fc1, self.hl_prior_fc2, \
+        #                     self.hl_prior_fc3, self.de_stage_1, self.de_stage_2)
+        initialize_weights(self.modules())
 
 
 

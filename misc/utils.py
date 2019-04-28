@@ -80,7 +80,7 @@ def logger(exp_path, exp_name, work_dir, exception, resume=False):
 
 
 
-def logger_for_CMTL(exp_path, exp_name, work_dir, exception):
+def logger_for_CMTL(exp_path, exp_name, work_dir, exception, resume=False):
     
     if not os.path.exists(exp_path):
         os.mkdir(exp_path)
@@ -95,8 +95,8 @@ def logger_for_CMTL(exp_path, exp_name, work_dir, exception):
     with open(log_file, 'a') as f:
         f.write(''.join(cfg_lines) + '\n\n\n\n')
 
-
-    copy_cur_env(work_dir, exp_path+ '/' + exp_name + '/code', exception)
+    if not resume:
+        copy_cur_env(work_dir, exp_path+ '/' + exp_name + '/code', exception)
 
 
     return log_file
@@ -106,6 +106,8 @@ def logger_txt(log_file,epoch,scores):
     mae, mse, loss = scores
 
     snapshot_name = 'all_ep_%d_mae_%.1f_mse_%.1f' % (epoch + 1, mae, mse)
+
+    # pdb.set_trace()
 
     with open(log_file, 'a') as f:
         f.write('='*15 + '+'*15 + '='*15 + '\n\n')
