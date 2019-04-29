@@ -12,7 +12,7 @@ import pdb
 # model_path = '../PyTorch_Pretrained/resnet50-19c8e357.pth'
 
 class Res50(nn.Module):
-    def __init__(self, ):
+    def __init__(self,  pretrained=True):
         super(Res50, self).__init__()
 
         self.de_pred = nn.Sequential(Conv2d(1024, 128, 1, same_padding=True, NL='relu'),

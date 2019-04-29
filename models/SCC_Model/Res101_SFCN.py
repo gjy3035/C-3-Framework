@@ -12,7 +12,7 @@ import pdb
 # model_path = '../PyTorch_Pretrained/resnet101-5d3b4d8f.pth'
 
 class Res101_SFCN(nn.Module):
-    def __init__(self, ):
+    def __init__(self, pretrained=True):
         super(Res101_SFCN, self).__init__()
         self.seen = 0
         self.backend_feat  = [512, 512, 512,256,128,64]

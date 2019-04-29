@@ -75,8 +75,8 @@ class Trainer():
 
     def pre_max_min_bin_val(self):
         for i, data in enumerate(self.train_loader, 0):
-            if i < 100:
-                # the first 100 epoch use for get the max and min people count
+            if i < 50:
+                # for getting the max and min people count
                 _, gt_map = data
 
                 for j in range(0, gt_map.size()[0]):
@@ -96,8 +96,7 @@ class Trainer():
                 _, gt_map = data
                 for j in range(0, gt_map.size()[0]):
                     temp_count = gt_map[j].sum() / self.cfg_data.LOG_PARA
-                    class_idx = np.round(temp_count/self.bin_val)
-                    class_idx = int(min(class_idx,self.num_classes-1))
+                    class_idx = min(int(temp_count/self.bin_val), self.num_classes-1)
                     count_class_hist[class_idx] += 1
 
         wts = count_class_hist
@@ -121,12 +120,12 @@ class Trainer():
 
             # generate gt's label same as implement of CMTL by Viswa
             gt_class_label = np.zeros(self.num_classes, dtype=np.int)
-            bin_val = ((self.max_gt_count - self.min_gt_count)/float(self.num_classes))
-            class_idx = np.round(gt_count/bin_val)
-            class_idx = int(min(class_idx, self.num_classes-1))
+            # bin_val = ((self.max_gt_count - self.min_gt_count)/float(self.num_classes))
+            class_idx = min(int(gt_count/self.bin_val), self.num_classes-1)
             gt_class_label[class_idx] = 1
             # pdb.set_trace()
-            label[i] = gt_class_label.reshape(1, gt_class_label.shape[0])
+            label[i] = gt_class_label.reshape(1, self.num_classes)
+
 
         return torch.from_numpy(label).float()
 
