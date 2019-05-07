@@ -21,7 +21,8 @@ The purpose of this code is an efficient, flexible framework for supervised crow
 
 
 ## Performance
-Due to limited spare time and the number of GPUs, I do not plan to conduct some experiments (named as "TBD"). If you are interested in the project, you are welcomed to submit your own experimental parameters and results.
+Due to limited spare time and the number of GPUs, I do not plan to conduct some experiments (named as "TBD"). If you are interested in the project, you are welcomed to submit your own experimental parameters and results. GCC(rd,cc,cl) stand for GCC dataset using **r**an**d**om/**c**ross-**c**amera/**c**ross-**l**ocation/ splitting, respectively.
+
 
 |          Method          |                GCC(rd,cc,cl)              | UCF-QNRF  |   SHT A   |  SHT B  |
 |--------------------------|-------------------------------------------|-----------|-----------|---------|
