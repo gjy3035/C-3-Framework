@@ -293,12 +293,13 @@ class Trainer():
                 losses.update(self.net.loss.item())
                 maes.update(s_mae)
                 mses.update(s_mse)
-                c_maes['level'].update(s_mae, attributes_pt[vi][0])
-                c_mses['level'].update(s_mse, attributes_pt[vi][0])
-                c_maes['time'].update(s_mae, attributes_pt[vi][1] / 3)
-                c_mses['time'].update(s_mse, attributes_pt[vi][1] / 3)
-                c_maes['weather'].update(s_mae, attributes_pt[vi][2])
-                c_mses['weather'].update(s_mse, attributes_pt[vi][2])
+                # `i_img` was not defined. I guess it should be deleted like in train_for_M2TCC
+                c_maes['level'].update(s_mae, attributes_pt[0])
+                c_mses['level'].update(s_mse, attributes_pt[0])
+                c_maes['time'].update(s_mae, attributes_pt[1] / 3)
+                c_mses['time'].update(s_mse, attributes_pt[1] / 3)
+                c_maes['weather'].update(s_mae, attributes_pt[2])
+                c_mses['weather'].update(s_mse, attributes_pt[2])
 
                 if vi == 0:
                     vis_results(self.exp_name, self.epoch, self.writer, self.restore_transform, img, pred_map, gt_map)
