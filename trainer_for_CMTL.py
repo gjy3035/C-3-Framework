@@ -56,7 +56,7 @@ class Trainer():
         self.epoch = 0
 
         if cfg.PRE_GCC:
-            net.load_state_dict(torch.load(cfg.PRE_GCC_MODEL))
+            self.net.load_state_dict(torch.load(cfg.PRE_GCC_MODEL))
 
         if cfg.RESUME:
             latest_state = torch.load(cfg.RESUME_PATH)
@@ -258,11 +258,15 @@ class Trainer():
                     pred_map = pred_map.data.cpu().numpy()
                     gt_map = gt_map.data.cpu().numpy()
 
-                    pred_cnt = np.sum(pred_map) / self.cfg_data.LOG_PARA
-                    gt_count = np.sum(gt_map) / self.cfg_data.LOG_PARA
 
-                    losses.update(self.net.loss.item(), i_sub)
-                    maes.update(abs(gt_count - pred_cnt), i_sub)
+                    for i_img in range(pred_map.shape[0]):
+                    
+                        pred_cnt = np.sum(pred_map[i_img])/self.cfg_data.LOG_PARA
+                        gt_count = np.sum(gt_map[i_img])/self.cfg_data.LOG_PARA
+
+                        losses.update(self.net.loss.item(),i_sub)
+                        maes.update(abs(gt_count-pred_cnt),i_sub)
+
                     if vi == 0:
                         vis_results(self.exp_name, self.epoch, self.writer, self.restore_transform, img, pred_map, gt_map)
 
@@ -273,7 +277,7 @@ class Trainer():
         self.writer.add_scalar('mae', mae, self.epoch + 1)
 
         self.train_record = update_model(self.net,self.optimizer,self.scheduler,self.epoch,self.i_tb,self.exp_path,self.exp_name, \
-            [mae, mse, loss],self.train_record,self.log_txt)
+            [mae, 0, loss],self.train_record,self.log_txt)
         print_summary(self.exp_name, [mae, 0, loss], self.train_record)
 
     def validate_V3(self):  # validate_V3 for GCC
@@ -298,21 +302,23 @@ class Trainer():
                 pred_map = pred_map.data.cpu().numpy()
                 gt_map = gt_map.data.cpu().numpy()
 
-                pred_cnt = np.sum(pred_map) / self.cfg_data.LOG_PARA
-                gt_count = np.sum(gt_map) / self.cfg_data.LOG_PARA
+                for i_img in range(pred_map.shape[0]):
 
-                s_mae = abs(gt_count - pred_cnt)
-                s_mse = (gt_count - pred_cnt) * (gt_count - pred_cnt)
+                    pred_cnt = np.sum(pred_map) / self.cfg_data.LOG_PARA
+                    gt_count = np.sum(gt_map) / self.cfg_data.LOG_PARA
 
-                losses.update(self.net.loss.item())
-                maes.update(s_mae)
-                mses.update(s_mse)
-                c_maes['level'].update(s_mae, attributes_pt[i_img][0])
-                c_mses['level'].update(s_mse, attributes_pt[i_img][0])
-                c_maes['time'].update(s_mae, attributes_pt[i_img][1] / 3)
-                c_mses['time'].update(s_mse, attributes_pt[i_img][1] / 3)
-                c_maes['weather'].update(s_mae, attributes_pt[i_img][2])
-                c_mses['weather'].update(s_mse, attributes_pt[i_img][2])
+                    s_mae = abs(gt_count - pred_cnt)
+                    s_mse = (gt_count - pred_cnt) * (gt_count - pred_cnt)
+
+                    losses.update(self.net.loss.item())
+                    maes.update(s_mae)
+                    mses.update(s_mse)
+                    c_maes['level'].update(s_mae, attributes_pt[i_img][0])
+                    c_mses['level'].update(s_mse, attributes_pt[i_img][0])
+                    c_maes['time'].update(s_mae, attributes_pt[i_img][1] / 3)
+                    c_mses['time'].update(s_mse, attributes_pt[i_img][1] / 3)
+                    c_maes['weather'].update(s_mae, attributes_pt[i_img][2])
+                    c_mses['weather'].update(s_mse, attributes_pt[i_img][2])
 
                 if vi == 0:
                     vis_results(self.exp_name, self.epoch, self.writer, self.restore_transform, img, pred_map, gt_map)
