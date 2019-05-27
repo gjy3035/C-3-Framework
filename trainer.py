@@ -200,7 +200,7 @@ class Trainer():
         self.writer.add_scalar('mae_s5', maes.avg[4], self.epoch + 1)
 
         self.train_record = update_model(self.net,self.optimizer,self.scheduler,self.epoch,self.i_tb,self.exp_path,self.exp_name, \
-            [mae, mse, loss],self.train_record,self.log_txt)
+            [mae, 0, loss],self.train_record,self.log_txt)
         print_WE_summary(self.log_txt,self.epoch,[mae, 0, loss],self.train_record,maes)
 
 

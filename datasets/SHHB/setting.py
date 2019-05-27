@@ -17,6 +17,6 @@ __C_SHHB.LOG_PARA = 100.
 __C_SHHB.RESUME_MODEL = ''#model path
 __C_SHHB.TRAIN_BATCH_SIZE = 6 #imgs
 
-__C_SHHB.VAL_BATCH_SIZE = 6 # must be 1
+__C_SHHB.VAL_BATCH_SIZE = 6 # 
 
 

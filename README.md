@@ -124,6 +124,7 @@ If you find this project is useful for your research, please cite:
   title={Learning from Synthetic Data for Crowd Counting in the Wild},
   author={Wang, Qi and Gao, Junyu and Lin, Wei and Yuan, Yuan},
   booktitle={Proceedings of IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages-{8198--8207},
   year={2019}
 }
 ```
