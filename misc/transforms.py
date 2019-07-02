@@ -101,8 +101,8 @@ class Scale(object):
 
     def __call__(self, img, mask):
         if img.size != mask.size:
-            print img.size
-            print mask.size           
+            print( img.size )
+            print( mask.size )          
         assert img.size == mask.size
         w, h = img.size
         if (w <= h and w == self.size) or (h <= w and h == self.size):

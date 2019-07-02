@@ -64,7 +64,7 @@ def test(file_list, model_path):
     preds = []
 
     for filename in file_list:
-    	print filename
+    	print( filename )
         imgname = dataRoot + '/img/' + filename
         filename_no_ext = filename.split('.')[0]
 

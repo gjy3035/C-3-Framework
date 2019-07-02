@@ -1,5 +1,7 @@
 # **C**rowd **C**ounting **C**ode Framework (C^3-Framework) 
 
+# Python 3 dev version!
+
 An open-source PyTorch code for crowd counting
 
 ---
@@ -60,14 +62,14 @@ Due to limited spare time and the number of GPUs, I do not plan to conduct some 
 - [x] ShanghaiTech Part_B
 - [x] WorldExpo'10
 - [x] UCF_CC_50
-- [] UCSD
-- [] Mall
+- [x] UCSD
+- [x] Mall
 
 ## Getting Started
 
 ### Preparation
 - Prerequisites
-  - Python 2.7
+  - Python 3.x
   - Pytorch 1.0 (some networks only support 0.4): http://pytorch.org .
   - other libs in ```requirements.txt```, run ```pip install -r requirements.txt```.
 
@@ -84,7 +86,7 @@ Due to limited spare time and the number of GPUs, I do not plan to conduct some 
 
 - Pretrained Model
   - Some Counting Networks (such as VGG, CSRNet and so on) adopt the pre-trained models on ImageNet. You can download them from [TorchVision](https://github.com/pytorch/vision/tree/master/torchvision/models)
-  - Place the processed model to ```../PyTorch_Pretrained```.
+  - Place the processed model to ```~/.cache/torch/checkpoints/``` (only for linux OS). 
 
 - Folder Tree
 
@@ -95,9 +97,6 @@ Due to limited spare time and the number of GPUs, I do not plan to conduct some 
     |   +-- ......
     +-- ProcessedData
     |   +-- shanghaitech_part_A
-    |   +-- ......
-    +-- PyTorch_Pretrained
-    |   +-- resnet50-19c8e357.pth
     |   +-- ......
     ```
     

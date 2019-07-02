@@ -86,7 +86,7 @@ class Trainer():
                     elif temp_count < self.min_gt_count:
                         self.min_gt_count = temp_count
 
-        print '[max_gt: %.2f min_gt: %.2f]' % (self.max_gt_count, self.min_gt_count)
+        print( '[max_gt: %.2f min_gt: %.2f]' % (self.max_gt_count, self.min_gt_count) )
         self.bin_val = (self.max_gt_count - self.min_gt_count)/float(self.num_classes)
 
     def pre_weights(self):
@@ -102,8 +102,8 @@ class Trainer():
         wts = count_class_hist
         wts = 1-wts/(sum(wts));
         wts = wts/sum(wts);
-        print 'pre_wts:'
-        print wts
+        print( 'pre_wts:' )
+        print( wts )
 
         return wts
 
@@ -142,8 +142,8 @@ class Trainer():
             self.train()
             self.timer['train time'].toc(average=False)
 
-            print 'train time: {:.2f}s'.format(self.timer['train time'].diff)
-            print '=' * 20
+            print( 'train time: {:.2f}s'.format(self.timer['train time'].diff) )
+            print( '=' * 20 )
 
             # validation
             if epoch % cfg.VAL_FREQ == 0 or epoch > cfg.VAL_DENSE_START:
@@ -155,7 +155,7 @@ class Trainer():
                 elif self.data_mode is 'GCC':
                     self.validate_V3()
                 self.timer['val time'].toc(average=False)
-                print 'val time: {:.2f}s'.format(self.timer['val time'].diff)
+                print( 'val time: {:.2f}s'.format(self.timer['val time'].diff) )
 
     def train(self):  # training for all datasets
         self.net.train()
@@ -184,10 +184,10 @@ class Trainer():
                 self.writer.add_scalar('train_loss1', loss1.item(), self.i_tb)
                 self.writer.add_scalar('train_loss2', loss2.item(), self.i_tb)
                 self.timer['iter time'].toc(average=False)
-                print '[ep %d][it %d][loss %.8f, %.8f, %.8f][lr %.4f][%.2fs]' % \
+                print( '[ep %d][it %d][loss %.8f, %.8f, %.8f][lr %.4f][%.2fs]' % \
                         (self.epoch + 1, i + 1, loss.item(),loss1.item(),loss2.item(), self.optimizer.param_groups[0]['lr'] * 10000,
-                 self.timer['iter time'].diff)
-                print '        [cnt: gt: %.1f pred: %.2f]' % (gt_map[0].sum().data/self.cfg_data.LOG_PARA, pred_map[0].sum().data/self.cfg_data.LOG_PARA)
+                 self.timer['iter time'].diff) )
+                print( '        [cnt: gt: %.1f pred: %.2f]' % (gt_map[0].sum().data/self.cfg_data.LOG_PARA, pred_map[0].sum().data/self.cfg_data.LOG_PARA) )
 
     def validate_V1(self):  # validate_V1 for SHHA, SHHB, UCF-QNRF, UCF50
 

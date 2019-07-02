@@ -72,8 +72,8 @@ class Trainer():
             self.train()
             self.timer['train time'].toc(average=False)
 
-            print 'train time: {:.2f}s'.format(self.timer['train time'].diff)
-            print '='*20
+            print( 'train time: {:.2f}s'.format(self.timer['train time'].diff) )
+            print( '='*20 )
 
             # validation
             if epoch%cfg.VAL_FREQ==0 or epoch>cfg.VAL_DENSE_START:
@@ -85,7 +85,7 @@ class Trainer():
                 elif self.data_mode is 'GCC':
                     self.validate_V3()
                 self.timer['val time'].toc(average=False)
-                print 'val time: {:.2f}s'.format(self.timer['val time'].diff)
+                print( 'val time: {:.2f}s'.format(self.timer['val time'].diff) )
 
 
     def train(self): # training for all datasets
@@ -109,9 +109,9 @@ class Trainer():
                 self.writer.add_scalar('train_loss1', loss1.item(), self.i_tb)
                 self.writer.add_scalar('train_loss2', loss2.item(), self.i_tb)
                 self.timer['iter time'].toc(average=False)
-                print '[ep %d][it %d][loss %.4f][lr %.4f][%.2fs]' % \
-                        (self.epoch + 1, i + 1, loss.item(), self.optimizer.param_groups[0]['lr']*10000, self.timer['iter time'].diff)
-                print '        [cnt: gt: %.1f pred: %.2f]' % (gt_map[0].sum().data/self.cfg_data.LOG_PARA, pred_map[0].sum().data/self.cfg_data.LOG_PARA)            
+                print( '[ep %d][it %d][loss %.4f][lr %.4f][%.2fs]' % \
+                        (self.epoch + 1, i + 1, loss.item(), self.optimizer.param_groups[0]['lr']*10000, self.timer['iter time'].diff) )
+                print( '        [cnt: gt: %.1f pred: %.2f]' % (gt_map[0].sum().data/self.cfg_data.LOG_PARA, pred_map[0].sum().data/self.cfg_data.LOG_PARA) )
 
 
 
@@ -126,7 +126,6 @@ class Trainer():
         mses = AverageMeter()
 
         for vi, data in enumerate(self.val_loader, 0):
-            # print vi
             img, gt_map = data
 
 

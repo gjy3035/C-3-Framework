@@ -1,8 +1,8 @@
 import torchvision.transforms as standard_transforms
 from torch.utils.data import DataLoader
 import misc.transforms as own_transforms
-from UCF50 import UCF50
-from setting import cfg_data 
+from .UCF50 import UCF50
+from .setting import cfg_data 
 import torch
 import random
 
@@ -25,10 +25,17 @@ def random_crop(img,den,dst_size):
 
     _,ts_hd,ts_wd = img.shape
 
-    x1 = random.randint(0, ts_wd - dst_size[1])
-    y1 = random.randint(0, ts_hd - dst_size[0])
+    x1 = random.randint(0, ts_wd - dst_size[1])//cfg_data.LABEL_FACTOR*cfg_data.LABEL_FACTOR
+    y1 = random.randint(0, ts_hd - dst_size[0])//cfg_data.LABEL_FACTOR*cfg_data.LABEL_FACTOR
+    x2 = x1 + dst_size[1]
+    y2 = y1 + dst_size[0]
 
-    return img[:,y1:y1+dst_size[0],x1:x1+dst_size[1]], den[y1:y1+dst_size[0],x1:x1+dst_size[1]]
+    label_x1 = x1//cfg_data.LABEL_FACTOR
+    label_y1 = y1//cfg_data.LABEL_FACTOR
+    label_x2 = x2//cfg_data.LABEL_FACTOR
+    label_y2 = y2//cfg_data.LABEL_FACTOR
+
+    return img[:,y1:y2,x1:x2], den[label_y1:label_y2,label_x1:label_x2]
 
 def share_memory(batch):
     out = None

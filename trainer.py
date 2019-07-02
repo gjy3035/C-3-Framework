@@ -65,8 +65,8 @@ class Trainer():
             self.train()
             self.timer['train time'].toc(average=False)
 
-            print 'train time: {:.2f}s'.format(self.timer['train time'].diff)
-            print '='*20
+            print( 'train time: {:.2f}s'.format(self.timer['train time'].diff) )
+            print( '='*20 )
 
             # validation
             if epoch%cfg.VAL_FREQ==0 or epoch>cfg.VAL_DENSE_START:
@@ -78,7 +78,7 @@ class Trainer():
                 elif self.data_mode is 'GCC':
                     self.validate_V3()
                 self.timer['val time'].toc(average=False)
-                print 'val time: {:.2f}s'.format(self.timer['val time'].diff)
+                print( 'val time: {:.2f}s'.format(self.timer['val time'].diff) )
 
 
     def train(self): # training for all datasets
@@ -99,9 +99,9 @@ class Trainer():
                 self.i_tb += 1
                 self.writer.add_scalar('train_loss', loss.item(), self.i_tb)
                 self.timer['iter time'].toc(average=False)
-                print '[ep %d][it %d][loss %.4f][lr %.4f][%.2fs]' % \
-                        (self.epoch + 1, i + 1, loss.item(), self.optimizer.param_groups[0]['lr']*10000, self.timer['iter time'].diff)
-                print '        [cnt: gt: %.1f pred: %.2f]' % (gt_map[0].sum().data/self.cfg_data.LOG_PARA, pred_map[0].sum().data/self.cfg_data.LOG_PARA)            
+                print( '[ep %d][it %d][loss %.4f][lr %.4f][%.2fs]' % \
+                        (self.epoch + 1, i + 1, loss.item(), self.optimizer.param_groups[0]['lr']*10000, self.timer['iter time'].diff) )
+                print( '        [cnt: gt: %.1f pred: %.2f]' % (gt_map[0].sum().data/self.cfg_data.LOG_PARA, pred_map[0].sum().data/self.cfg_data.LOG_PARA) )           
 
 
     def validate_V1(self):# validate_V1 for SHHA, SHHB, UCF-QNRF, UCF50

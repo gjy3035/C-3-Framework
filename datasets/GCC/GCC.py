@@ -65,7 +65,7 @@ class GCC(data.Dataset):
         return self.num_samples
 
     def read_image_and_gt(self,index):
-        # print self.file_folder[index] + ' ' + self.file_name[index] + ' ' + self.gt_cnt[index]
+
         img_path = os.path.join(cfg_data.DATA_PATH+self.file_folder[index], 'pngs_544_960', self.file_name[index]+'.png')
 
         den_map_path = os.path.join(cfg_data.DATA_PATH+self.file_folder[index], 'csv_den_maps_' + cfg_data.DATA_GT +'_544_960', self.file_name[index]+'.csv')
