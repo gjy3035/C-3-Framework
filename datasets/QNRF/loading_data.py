@@ -51,7 +51,7 @@ def SHHA_collate(batch):
     # @GJY 
     r"""Puts each data field into a tensor with outer dimension batch size"""
 
-    transposed = zip(*batch) # imgs and dens
+    transposed = list(zip(*batch)) # imgs and dens
     imgs, dens = [transposed[0],transposed[1]]
 
 
