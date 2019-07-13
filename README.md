@@ -129,10 +129,10 @@ If you find this project is useful for your research, please cite:
 }
 ```
 ```
-@misc{gao2019c3framework,
-author = {Gao, Junyu and Gao, Chenyu and Zeng, Xin and Qin, Zequn and Wen, Jun},
-title = {C^3-Framework: An open-source PyTorch code for crowd counting},
-year = {2019},
-howpublished = {\url{https://github.com/gjy3035/C-3-Framework}}
+@article{gao2019c,
+  title={C^3 Framework: An Open-source PyTorch Code for Crowd Counting},
+  author={Gao, Junyu and Lin, Wei and Zhao, Bin and Wang, Dong and Gao, Chenyu and Wen, Jun},
+  journal={arXiv preprint arXiv:1907.02724},
+  year={2019}
 }
 ```
