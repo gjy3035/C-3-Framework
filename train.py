@@ -37,7 +37,13 @@ elif data_mode is 'WE':
     from datasets.WE.setting import cfg_data 
 elif data_mode is 'GCC':
     from datasets.GCC.loading_data import loading_data
-    from datasets.GCC.setting import cfg_data 
+    from datasets.GCC.setting import cfg_data
+elif data_mode is 'Mall':
+    from datasets.Mall.loading_data import loading_data
+    from datasets.Mall.setting import cfg_data
+elif data_mode is 'UCSD':
+    from datasets.UCSD.loading_data import loading_data
+    from datasets.UCSD.setting import cfg_data 
 
 
 #------------Prepare Trainer------------
