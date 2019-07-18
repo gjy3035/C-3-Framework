@@ -130,7 +130,7 @@ If you find this project is useful for your research, please cite:
 ```
 ```
 @article{gao2019c,
-  title={C^3 Framework: An Open-source PyTorch Code for Crowd Counting},
+  title={C$^3$ Framework: An Open-source PyTorch Code for Crowd Counting},
   author={Gao, Junyu and Lin, Wei and Zhao, Bin and Wang, Dong and Gao, Chenyu and Wen, Jun},
   journal={arXiv preprint arXiv:1907.02724},
   year={2019}
