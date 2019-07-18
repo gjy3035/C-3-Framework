@@ -8,7 +8,7 @@ __C = edict()
 cfg = __C
 
 #------------------------------TRAIN------------------------
-__C.SEED = 3035 # random seed,  for reporduction
+__C.SEED = 3035 # random seed,  for reproduction
 __C.DATASET = 'SHHB' # dataset selection: GCC, SHHA, SHHB, UCF50, QNRF, WE
 
 if __C.DATASET == 'UCF50':# only for UCF50
