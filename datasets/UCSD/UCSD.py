@@ -25,9 +25,9 @@ class UCSD(data.Dataset):
         self.mode = mode
 
         if self.mode is 'train':
-            print '[UCSD DATASET]: %d training images.'  % (self.num_samples)
+            print('[UCSD DATASET]: %d training images.'  % (self.num_samples))
         if self.mode is 'test':
-            print '[UCSD DATASET]: %d testing images.'  % (self.num_samples)     
+            print('[UCSD DATASET]: %d testing images.'  % (self.num_samples))     
     
     def __getitem__(self, index):
         # print self.data_files[index]
