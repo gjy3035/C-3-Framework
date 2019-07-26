@@ -153,6 +153,6 @@ class GTScaleDown(object):
         w, h = img.size
         if self.factor==1:
             return img
-        tmp = np.array(img.resize((w/self.factor, h/self.factor), Image.BICUBIC))*self.factor*self.factor
+        tmp = np.array(img.resize((w//self.factor, h//self.factor), Image.BICUBIC))*self.factor*self.factor
         img = Image.fromarray(tmp)
         return img
