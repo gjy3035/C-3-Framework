@@ -7,7 +7,7 @@ cfg_data = __C_UCF50
 
 __C_UCF50.STD_SIZE = (768,1024)
 __C_UCF50.TRAIN_SIZE = (576,768)
-__C_UCF50.DATA_PATH = '/media/D/DataSet/CC/UCF/768x1024'               
+__C_UCF50.DATA_PATH = '/home/jupyter/crowdcounting/ProcessedData/UCF_CC_50'               
 
 __C_UCF50.MEAN_STD = ([0.403584420681,0.403584420681,0.403584420681], [0.268462955952,0.268462955952,0.268462955952])
 
