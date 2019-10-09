@@ -1,0 +1,68 @@
+/opt/anaconda3/lib/python3.7/site-packages/torch/optim/lr_scheduler.py:82: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule.See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  "https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate", UserWarning)
+[ep 1][it 10][loss 0.0123][lr 0.0995][0.05s]
+        [cnt: gt: 17.3 pred: 209.58]
+[ep 1][it 20][loss 0.0147][lr 0.0995][0.05s]
+        [cnt: gt: 20.5 pred: 82.51]
+[ep 1][it 30][loss 0.0094][lr 0.0995][0.03s]
+        [cnt: gt: 14.0 pred: 71.99]
+[ep 1][it 40][loss 0.0080][lr 0.0995][0.03s]
+        [cnt: gt: 41.0 pred: 63.51]
+[ep 1][it 50][loss 0.0045][lr 0.0995][0.04s]
+        [cnt: gt: 16.1 pred: 47.93]
+[ep 1][it 60][loss 0.0049][lr 0.0995][0.03s]
+        [cnt: gt: 82.7 pred: 74.37]
+train time: 15.50s
+====================
+/opt/anaconda3/lib/python3.7/site-packages/torch/nn/functional.py:2390: UserWarning: nn.functional.upsample is deprecated. Use nn.functional.interpolate instead.
+  warnings.warn("nn.functional.upsample is deprecated. Use nn.functional.interpolate instead.")
+==================================================
+10-08_19-12_SHHB_AlexNet_1e-05
+    --------------------
+    [mae 77.53 mse 113.67], [val loss 0.0127]
+    --------------------
+[best] [model: all_ep_1_mae_77.5_mse_113.7] , [mae 77.53], [mse 113.67]
+==================================================
+val time: 16.36s
+[ep 2][it 10][loss 0.0100][lr 0.0990][0.06s]
+        [cnt: gt: 38.0 pred: 33.79]
+[ep 2][it 20][loss 0.0044][lr 0.0990][0.06s]
+        [cnt: gt: 33.0 pred: 22.40]
+[ep 2][it 30][loss 0.0053][lr 0.0990][0.04s]
+        [cnt: gt: 81.7 pred: 35.72]
+[ep 2][it 40][loss 0.0073][lr 0.0990][0.03s]
+        [cnt: gt: 39.0 pred: 7.59]
+[ep 2][it 50][loss 0.0132][lr 0.0990][0.04s]
+        [cnt: gt: 21.0 pred: 6.30]
+[ep 2][it 60][loss 0.0071][lr 0.0990][0.06s]
+        [cnt: gt: 16.6 pred: 7.46]
+train time: 16.93s
+====================
+[ep 3][it 10][loss 0.0060][lr 0.0985][0.03s]
+        [cnt: gt: 9.8 pred: 10.89]
+[ep 3][it 20][loss 0.0124][lr 0.0985][0.05s]
+        [cnt: gt: 20.8 pred: 4.20]
+[ep 3][it 30][loss 0.0030][lr 0.0985][0.03s]
+        [cnt: gt: 13.1 pred: 5.14]
+[ep 3][it 40][loss 0.0039][lr 0.0985][0.03s]
+        [cnt: gt: 31.0 pred: 24.27]
+[ep 3][it 50][loss 0.0147][lr 0.0985][0.04s]
+        [cnt: gt: 172.9 pred: 12.69]
+[ep 3][it 60][loss 0.0098][lr 0.0985][0.03s]
+        [cnt: gt: 19.8 pred: 14.41]
+train time: 16.33s
+====================
+[ep 4][it 10][loss 0.0147][lr 0.0980][0.05s]
+        [cnt: gt: 27.6 pred: 16.92]
+[ep 4][it 20][loss 0.0075][lr 0.0980][0.03s]
+        [cnt: gt: 72.9 pred: 26.09]
+[ep 4][it 30][loss 0.0144][lr 0.0980][0.03s]
+        [cnt: gt: 20.8 pred: 5.67]
+[ep 4][it 40][loss 0.0046][lr 0.0980][0.03s]
+        [cnt: gt: 7.0 pred: 5.19]
+[ep 4][it 50][loss 0.0061][lr 0.0980][0.05s]
+        [cnt: gt: 19.0 pred: 7.96]
+[ep 4][it 60][loss 0.0063][lr 0.0980][0.03s]
+        [cnt: gt: 152.8 pred: 77.78]
+train time: 16.12s
+====================

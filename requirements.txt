@@ -1,9 +1,10 @@
 torch
 torchvision
-tensorboardX
-tensorboard
-tensorflow
+#tensorboardX
+#tensorboard
+#tensorflow
 easydict
-pandas
-numpy
-scipy
+#pandas
+#numpy
+#scipy
+# after first installation

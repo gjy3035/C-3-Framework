@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "train.py", line 56, in <module>
+    cc_trainer = Trainer(loading_data,cfg_data,pwd)
+  File "/home/jupyter/crowdcounting/C-3-Framework/trainer.py", line 25, in __init__
+    self.net = CrowdCounter(cfg.GPU_ID,self.net_name).cuda()
+  File "/home/jupyter/crowdcounting/C-3-Framework/models/CC.py", line 27, in __init__
+    self.CCN = net()
+  File "/home/jupyter/crowdcounting/C-3-Framework/models/SCC_Model/AlexNet.py", line 16, in __init__
+    alex.load_state_dict(torch.load(model_path)) ### XCA add pre trained model
+  File "/opt/anaconda3/lib/python3.7/site-packages/torch/serialization.py", line 386, in load
+    return _load(f, map_location, pickle_module, **pickle_load_args)
+  File "/opt/anaconda3/lib/python3.7/site-packages/torch/serialization.py", line 563, in _load
+    magic_number = pickle_module.load(f, **pickle_load_args)
+_pickle.UnpicklingError: unpickling stack underflow
