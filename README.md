@@ -38,7 +38,7 @@ Due to limited spare time and the number of GPUs, I do not plan to conduct some 
 | CSRNet                   |  32.6/74.3,      54.6/135.2,    87.3/217.2|    TBD    |69.3/111.9 |10.6/16.6|
 | SANet                    |  42.4/85.4,      79.3/179.9,   110.0/246.0|    TBD    |    TBD    |12.1/19.2|
 | CMTL                     |                       -                   |    TBD    |    TBD    |14.0/22.3|
-| ResSFCN-101 (SFCN+)      |  **26.8/66.1**,  56.5/139.0,    83.5/211.5|    TBD    |    TBD    |   TBD   |
+| ResSFCN-101 (SFCN+)      |  **26.8/66.1**,  56.5/139.0,    83.5/211.5|    TBD    |    TBD    |7.8/12.6 |
 
 
 |          Method          | WE |UCF50|
