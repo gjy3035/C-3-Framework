@@ -114,7 +114,11 @@ We only provide an example to test the model on the test set. You may need to mo
 
 ### Pretrained Models on GCC
 
-Considering the large-scale GCC, we provide the pretrained models on GCC using random splitting to save the researcher's training time. You can download them from this [link](https://mailnwpueducn-my.sharepoint.com/:f:/g/personal/gjy3035_mail_nwpu_edu_cn/EvH1YcdFBbRJoc7G_Vqv0DwBGmuyXPlH899OrQ54-cybWQ?e=t93edQ). Unfortunately, we've lost the MCNN model trained on GCC, and we will re-train and realease it ASAP.
+Considering the large-scale GCC, we provide the pretrained models on GCC using random splitting to save the researcher's training time. You can download them from this [link](https://mailnwpueducn-my.sharepoint.com/:f:/g/personal/gjy3035_mail_nwpu_edu_cn/EvH1YcdFBbRJoc7G_Vqv0DwBGmuyXPlH899OrQ54-cybWQ?e=t93edQ). Unfortunately, we've lost the MCNN model trained on GCC, and we will re-train and release it ASAP.
+
+## Tips
+
+In this code, the validation is directly on the test set. Strictly speaking, it should be evaluated on the val set (randomly selected from the training set, which is adopted in the paper). Here, for a comparable reproduction (namely fixed splitting sets), this code directly adopts the test set for validation, which causes that the results of this code are better than that of our paper. If you use this repo for academic research, you need to select 10% training data (or other value) as validation set. 
 
 ## Citation
 If you find this project is useful for your research, please cite:
