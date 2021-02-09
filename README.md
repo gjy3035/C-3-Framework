@@ -6,8 +6,7 @@ An open-source PyTorch code for crowd counting
 
 ---
 
-This repo is under development. We will spare our spare time to develop it. 
-If you have any question/suggestion or find any bugs, please submit the issue/PR instead of email or other ways. 
+**Note: Due to personal reasons, the code will not continue to be maintained. I suggest you use [NWPU-Crowd-Sample-Code](https://github.com/gjy3035/NWPU-Crowd-Sample-Code) or use other excellent code in [Awesome-Crowd-Counting](https://github.com/gjy3035/Awesome-Crowd-Counting).** 
 
 ## Technical Blog
 - [2019.05] [Chinese Blog] C^3 Framework系列之一：一个基于PyTorch的开源人群计数框架 [[Link](https://zhuanlan.zhihu.com/p/65650998)]
